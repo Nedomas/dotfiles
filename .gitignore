@@ -2,4 +2,6 @@
 vim/backups
 vim/bundle
 vim/vim
+bin/bin
+zsh/themes/themes
 

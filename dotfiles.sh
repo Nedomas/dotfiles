@@ -19,6 +19,9 @@ link "zshrc" ".zshrc"
 link "vimrc" ".vimrc"
 link "vim" ".vim"
 link "tmux.conf" ".tmux.conf"
+link "gitconfig" ".gitconfig"
+link "bin" "bin"
+link "zsh/themes" ".oh-my-zsh/themes"
 
 # vim vundle
 if [ ! -d $DOTFILES_ROOT/vim/bundle ]; then

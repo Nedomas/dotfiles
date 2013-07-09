@@ -88,10 +88,18 @@ set hidden
 set timeoutlen=500
 
 " ignore desperate arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+no <Up> <NOP>
+no <Down> <NOP>
+no <Left> <NOP>
+no <Right> <NOP>
+ino <Up> <NOP>
+ino <Down> <NOP>
+ino <Left> <NOP>
+ino <Right> <NOP>
+vno <Up> <NOP>
+vno <Down> <NOP>
+vno <Left> <NOP>
+vno <Right> <NOP>
 
 " ================ Turn Off Swap Files ==============
 

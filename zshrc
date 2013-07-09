@@ -1,7 +1,7 @@
 # zsh configuration
 ZSH=$HOME/.oh-my-zsh
 # theme for prefix & suffix
-ZSH_THEME="juanghurtado"
+ZSH_THEME="mayhem"
 plugins=(git github autojump command-not-found rails3 bundler ruby)
 source $ZSH/oh-my-zsh.sh
 
@@ -80,3 +80,5 @@ export LC_ALL="en_US.UTF-8"
 
 # source PATH & workspace-specific settings
 source $HOME/.custom
+export PATH=$PATH:$HOME/bin
+
