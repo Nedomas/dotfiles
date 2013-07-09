@@ -18,6 +18,7 @@ echo 'symlinking dotfiles'
 link "zshrc" ".zshrc"
 link "vimrc" ".vimrc"
 link "vim" ".vim"
+link "tmux.conf" ".tmux.conf"
 
 # vim vundle
 if [ ! -d $DOTFILES_ROOT/vim/bundle ]; then

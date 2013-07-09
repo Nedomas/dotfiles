@@ -45,7 +45,7 @@ alias zs="zeus s"
 alias zc="zeus c"
 alias cc="zeus cucumber --f pretty"
 alias zweep="rm .zeus.sock"
-alias zspec="zeus rspec"
+alias zsp="zeus rspec"
 alias colad="cola dag"
 
 alias gfe="g fetch"

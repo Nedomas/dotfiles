@@ -33,6 +33,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/ruby-matchit'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'slim-template/vim-slim'
+Bundle 'scrooloose/nerdtree'
 
 " ================ Ruby stuff ====================
 syntax on " Enable syntax highlighting
@@ -122,7 +123,7 @@ filetype indent on
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
 " delete trailing spaces on save
-au BufWritePre *.rb :%s/\s\+$//e
+au BufWritePre * :%s/\s\+$//e
 
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
@@ -167,3 +168,5 @@ map <Leader>n :call RenameFile()<cr>
 
 nnoremap <leader>vrc :vsplit $MYVIMRC<cr>
 nnoremap <leader>zsh :vsplit ~/.zshrc<cr>
+nnoremap <leader>tmx :vsplit ~/.tmux.conf<cr>
+
