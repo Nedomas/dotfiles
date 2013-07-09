@@ -48,6 +48,12 @@ augroup END
 
 set bg=dark
 colorscheme solarized
+if $COLORTERM == 'gnome-terminal'
+  set term=xterm-256color
+  let g:solarized_termcolors=256
+  set t_Co=256
+endif
+
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=1000
 set ruler " show the cursor position all the time
@@ -66,7 +72,6 @@ set smarttab
 set noincsearch
 set ignorecase smartcase
 set laststatus=2  " Always show status line.
-set relativenumber
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
 set number " Line numbers are good
