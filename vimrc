@@ -12,6 +12,8 @@ let mapleader=","
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
+" set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 call vundle#rc()
 
 " let Vundle manage Vundle (required)
@@ -34,6 +36,10 @@ Bundle 'vim-scripts/ruby-matchit'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'slim-template/vim-slim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'Lokaltog/powerline'
+Bundle 'mileszs/ack.vim'
+Bundle 'ap/vim-css-color'
+Bundle 'ecomba/vim-ruby-refactoring'
 
 " ================ Ruby stuff ====================
 syntax on " Enable syntax highlighting
@@ -149,6 +155,10 @@ set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
+" ================ Scripts ========================
+source ~/.vim/scripts/js.vim
+source ~/.vim/scripts/vim.vim
+
 " ================ Mappings ========================
 
 " ignore desperate arrow keys
@@ -165,23 +175,20 @@ vno <Down> <NOP>
 vno <Left> <NOP>
 vno <Right> <NOP>
 
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
-endfunction
-map <Leader>n :call RenameFile()<cr>
+map <Leader>r :call RenameFile()<cr>
+nnoremap <leader>nt :NERDTreeToggle<cr>
 
-nnoremap <leader>vrc :vsplit $MYVIMRC<cr>
-nnoremap <leader>zsh :vsplit ~/.zshrc<cr>
-nnoremap <leader>tmx :vsplit ~/.tmux.conf<cr>
+nnoremap <leader>vrc $MYVIMRC<cr>
+nnoremap <leader>zsh ~/.zshrc<cr>
+nnoremap <leader>cst ~/.custom<cr>
+nnoremap <leader>tmx ~/.tmux.conf<cr>
 
 imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>{ {  }<ESC>hi
+
+" insert lines above or below the cursor
+nmap gO O<ESC>j
+nmap go o<ESC>k

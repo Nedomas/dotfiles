@@ -20,7 +20,7 @@ link "vimrc" ".vimrc"
 link "vim" ".vim"
 link "tmux.conf" ".tmux.conf"
 link "gitconfig" ".gitconfig"
-link "bin" "bin"
+link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
 link "zsh/themes" ".oh-my-zsh/themes"
 
 # vim vundle
