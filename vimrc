@@ -87,20 +87,6 @@ set noesckeys " Get rid of the delay when hitting esc!
 set hidden
 set timeoutlen=500
 
-" ignore desperate arrow keys
-no <Up> <NOP>
-no <Down> <NOP>
-no <Left> <NOP>
-no <Right> <NOP>
-ino <Up> <NOP>
-ino <Down> <NOP>
-ino <Left> <NOP>
-ino <Right> <NOP>
-vno <Up> <NOP>
-vno <Down> <NOP>
-vno <Left> <NOP>
-vno <Right> <NOP>
-
 " ================ Turn Off Swap Files ==============
 
 set noswapfile
@@ -163,6 +149,22 @@ set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
+" ================ Mappings ========================
+
+" ignore desperate arrow keys
+no <Up> ddkP
+no <Down> ddp
+no <Left> <NOP>
+no <Right> <NOP>
+ino <Up> <NOP>
+ino <Down> <NOP>
+ino <Left> <NOP>
+ino <Right> <NOP>
+vno <Up> <NOP>
+vno <Down> <NOP>
+vno <Left> <NOP>
+vno <Right> <NOP>
+
 function! RenameFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'), 'file')
@@ -178,3 +180,8 @@ nnoremap <leader>vrc :vsplit $MYVIMRC<cr>
 nnoremap <leader>zsh :vsplit ~/.zshrc<cr>
 nnoremap <leader>tmx :vsplit ~/.tmux.conf<cr>
 
+imap <leader>' ''<ESC>i
+imap <leader>" ""<ESC>i
+imap <leader>( ()<ESC>i
+imap <leader>[ []<ESC>i
+imap <leader>{ {  }<ESC>hi
