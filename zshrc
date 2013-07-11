@@ -46,6 +46,8 @@ alias zc="zeus c"
 alias cc="zeus cucumber --f pretty"
 alias zweep="rm .zeus.sock"
 alias zsp="zeus rspec"
+alias cs33="rails s -e cucumber -p 3333"
+alias c33="cucumber --f pretty"
 alias colad="cola dag"
 
 alias gfe="g fetch"

@@ -31,4 +31,5 @@ fi
 if [ ! -e $DOTFILES_ROOT/vim/bundle/vundle ]; then
   echo "installing neobundle"
   git clone git://github.com/Shougo/neobundle.vim $DOTFILES_ROOT/vim/bundle/neobundle.vim
+  vim +NeoBundleInstall +q
 fi

@@ -13,9 +13,9 @@ let mapleader=","
 filetype off
 if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
+  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -23,7 +23,14 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " main bundles
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+  \     'windows' : 'make -f make_mingw32.mak',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make -f make_mac.mak',
+  \     'unix' : 'make -f make_unix.mak',
+  \   },
+  \ }
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'Shougo/unite.vim'
@@ -33,6 +40,7 @@ NeoBundle 'mhinz/vim-startify'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " language-specific
 NeoBundle 'vim-ruby/vim-ruby'
@@ -80,6 +88,13 @@ let g:airline_section_x=""
 let g:airline_section_y="%Y"
 
 " Unite
+" use ack in unite grep source
+if executable('ack-grep')
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
+  " let g:unite_source_grep_recursive_opt = ''
+endif
+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 noremap <leader>/ :<C-u>Unite -no-split -buffer-name=grep -start-insert grep:.<cr>
@@ -226,13 +241,21 @@ vno <Right> <NOP>
 map <Leader>r :call RenameFile()<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
 
-nnoremap <leader>vrc $MYVIMRC<cr>
-nnoremap <leader>zsh ~/.zshrc<cr>
-nnoremap <leader>cst ~/.custom<cr>
-nnoremap <leader>tmx ~/.tmux.conf<cr>
+nnoremap <leader>vrc :e $MYVIMRC<cr>
+nnoremap <leader>zsh :e ~/.zshrc<cr>
+nnoremap <leader>cst :e ~/.custom<cr>
+nnoremap <leader>tmx :e ~/.tmux.conf<cr>
 
 imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>{ {  }<ESC>hi
+
+" insert PRY tags
+autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
+autocmd FileType cucumber imap <leader>b When I use pry<ESC>==o
+autocmd FileType javascript imap <leader>b debugger;<ESC>==o
+autocmd FileType ruby nmap <leader>b ibinding.pry<ESC>==
+autocmd FileType cucumber nmap <leader>b iWhen I use pry<ESC>==
+autocmd FileType javascript nmap <leader>b idebugger;<ESC>==
