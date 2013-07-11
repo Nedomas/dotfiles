@@ -4,44 +4,61 @@ set nocompatible
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
-" The mapleader has to be set before vundle starts loading all
+" The mapleader has to be set before neobundle starts loading all
 " the plugins.
 let mapleader=","
 
-" ================ Vundle stuff ====================
+" ================ Plugin stuff ====================
+
 filetype off
+if has('vim_starting')
+  set rtp+=~/.vim/bundle/neobundle.vim/
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-" set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-call vundle#rc()
 
-" let Vundle manage Vundle (required)
-Bundle 'gmarik/vundle'
+" main bundles
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'mhinz/vim-startify'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'scrooloose/nerdtree'
 
-" custom bundles
-Bundle 'ervandew/supertab'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'kien/ctrlp.vim'
-Bundle 'vim-scripts/ruby-matchit'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'slim-template/vim-slim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/powerline'
-Bundle 'mileszs/ack.vim'
-Bundle 'ap/vim-css-color'
-Bundle 'ecomba/vim-ruby-refactoring'
+" language-specific
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'vim-scripts/ruby-matchit'
+NeoBundle 'ecomba/vim-ruby-refactoring'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-cucumber'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'ap/vim-css-color'
+
+" other stuff
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'scrooloose/syntastic'
+
+NeoBundleCheck
 
 " ================ Ruby stuff ====================
+
 syntax on " Enable syntax highlighting
 filetype plugin indent on " Enable filetype-specific indenting and plugins
 
@@ -50,6 +67,37 @@ augroup myfiletypes
   autocmd!
 augroup END
 
+" ================ Plugin settings ====================
+
+" Airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" set second section to filename
+" & empty fourth section
+let g:airline_section_c="%f"
+let g:airline_section_x=""
+" put filetype in fifth section
+let g:airline_section_y="%Y"
+
+" Unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
+noremap <leader>/ :<C-u>Unite -no-split -buffer-name=grep -start-insert grep:.<cr>
+let g:unite_source_history_yank_enable = 1
+noremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
+noremap <leader>s :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
+
+" Fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " ================ Various stuff ====================
 
@@ -162,8 +210,8 @@ source ~/.vim/scripts/vim.vim
 " ================ Mappings ========================
 
 " ignore desperate arrow keys
-no <Up> ddkP
-no <Down> ddp
+no <Up> <NOP>
+no <Down> <NOP>
 no <Left> <NOP>
 no <Right> <NOP>
 ino <Up> <NOP>
@@ -188,7 +236,3 @@ imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>{ {  }<ESC>hi
-
-" insert lines above or below the cursor
-nmap gO O<ESC>j
-nmap go o<ESC>k

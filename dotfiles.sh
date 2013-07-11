@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES_ROOT="`pwd`"
-BACKUP_DIR="$HOME/dotfiles_backup"
+BACKUP_DIR="$HOME/backup_dotfiles"
 
 link() {
   if [[ -e "${HOME}/${2}" ]]; then
@@ -23,16 +23,12 @@ link "gitconfig" ".gitconfig"
 link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
 link "zsh/themes" ".oh-my-zsh/themes"
 
-# vim vundle
+# vim plugin manager
 if [ ! -d $DOTFILES_ROOT/vim/bundle ]; then
   mkdir -p $DOTFILES_ROOT/vim/bundle
 fi
 
 if [ ! -e $DOTFILES_ROOT/vim/bundle/vundle ]; then
-  echo "installing vundle"
-  git clone http://github.com/gmarik/vundle.git $DOTFILES_ROOT/vim/bundle/vundle
+  echo "installing neobundle"
+  git clone git://github.com/Shougo/neobundle.vim $DOTFILES_ROOT/vim/bundle/neobundle.vim
 fi
-
-echo "update & install vundle plugins"
-vim +BundleInstall +qall
-
