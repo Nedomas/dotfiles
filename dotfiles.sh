@@ -3,6 +3,9 @@
 DOTFILES_ROOT="`pwd`"
 BACKUP_DIR="$HOME/backup_dotfiles"
 
+[[ -e "${HOME}/bin" ]] || mkdir -p "${HOME}/bin"
+[[ -e "${HOME}/.oh-my-zsh/themes" ]] || mkdir -p "${HOME}/.oh-my-zsh/themes"
+
 link() {
   if [[ -e "${HOME}/${2}" ]]; then
     [[ -e "$BACKUP_DIR" ]] || mkdir -p "$BACKUP_DIR"
@@ -21,14 +24,15 @@ link "vim" ".vim"
 link "tmux.conf" ".tmux.conf"
 link "gitconfig" ".gitconfig"
 link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
-link "zsh/themes" ".oh-my-zsh/themes"
+link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
+link "ackrc" ".ackrc"
 
 # vim plugin manager
 if [ ! -d $DOTFILES_ROOT/vim/bundle ]; then
   mkdir -p $DOTFILES_ROOT/vim/bundle
 fi
 
-if [ ! -e $DOTFILES_ROOT/vim/bundle/vundle ]; then
+if [ ! -e $DOTFILES_ROOT/vim/bundle/neobundle.vim ]; then
   echo "installing neobundle"
   git clone git://github.com/Shougo/neobundle.vim $DOTFILES_ROOT/vim/bundle/neobundle.vim
   vim +NeoBundleInstall +q

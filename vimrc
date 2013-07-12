@@ -1,7 +1,6 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
 " The mapleader has to be set before neobundle starts loading all
@@ -14,6 +13,10 @@ filetype off
 if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
   call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+" source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
 
@@ -34,6 +37,7 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'mileszs/ack.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'mhinz/vim-startify'
@@ -41,6 +45,8 @@ NeoBundle 'ervandew/supertab'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'christoomey/vim-tmux-navigator'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'mhinz/vim-tmuxify'
 
 " language-specific
 NeoBundle 'vim-ruby/vim-ruby'
@@ -62,6 +68,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'sjl/gundo.vim'
 
 NeoBundleCheck
 
@@ -89,11 +96,7 @@ let g:airline_section_y="%Y"
 
 " Unite
 " use ack in unite grep source
-if executable('ack-grep')
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
-  " let g:unite_source_grep_recursive_opt = ''
-endif
+let g:unite_source_grep_command = 'Ack'
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
@@ -240,11 +243,16 @@ vno <Right> <NOP>
 
 map <Leader>r :call RenameFile()<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <F6> :GundoToggle<CR>
+map <leader>ew :e<space>
+map <leader>es :sp<space>
+map <leader>ev :vsp<space>
 
 nnoremap <leader>vrc :e $MYVIMRC<cr>
 nnoremap <leader>zsh :e ~/.zshrc<cr>
 nnoremap <leader>cst :e ~/.custom<cr>
 nnoremap <leader>tmx :e ~/.tmux.conf<cr>
+nnoremap <leader>arc :e ~/.ackrc<cr>
 
 imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
@@ -252,7 +260,13 @@ imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>{ {  }<ESC>hi
 
-" insert PRY tags
+" git shortcuts
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
+
+" insert binding tags
 autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
 autocmd FileType cucumber imap <leader>b When I use pry<ESC>==o
 autocmd FileType javascript imap <leader>b debugger;<ESC>==o
