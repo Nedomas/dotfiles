@@ -14,11 +14,6 @@ if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
-" source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -69,6 +64,7 @@ NeoBundle 'mattn/gist-vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sjl/gundo.vim'
+NeoBundle 'milkypostman/vim-togglelist'
 
 NeoBundleCheck
 
@@ -96,7 +92,8 @@ let g:airline_section_y="%Y"
 
 " Unite
 " use ack in unite grep source
-let g:unite_source_grep_command = 'Ack'
+let g:unite_source_grep_command = 'ack'
+let g:vendorunite_source_rec_async_command = 'ack -f --nofilter --ackrc=~/.ackrc'
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
@@ -117,6 +114,8 @@ endfunction
 " Fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" Cucumber syntastic
+let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
 " ================ Various stuff ====================
 
 set bg=dark
@@ -252,6 +251,7 @@ nnoremap <leader>vrc :e $MYVIMRC<cr>
 nnoremap <leader>zsh :e ~/.zshrc<cr>
 nnoremap <leader>cst :e ~/.custom<cr>
 nnoremap <leader>tmx :e ~/.tmux.conf<cr>
+nnoremap <leader>muxss :e ~/.tmuxinator/ss.yml<cr>
 nnoremap <leader>arc :e ~/.ackrc<cr>
 
 imap <leader>' ''<ESC>i
@@ -270,6 +270,15 @@ nnoremap <leader>gb :Gblame<cr>
 autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
 autocmd FileType cucumber imap <leader>b When I use pry<ESC>==o
 autocmd FileType javascript imap <leader>b debugger;<ESC>==o
-autocmd FileType ruby nmap <leader>b ibinding.pry<ESC>==
-autocmd FileType cucumber nmap <leader>b iWhen I use pry<ESC>==
-autocmd FileType javascript nmap <leader>b idebugger;<ESC>==
+autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
+autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
+autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
+autocmd FileType ruby nmap <leader>B Obinding.pry<ESC>==
+autocmd FileType cucumber nmap <leader>B OWhen I use pry<ESC>==
+autocmd FileType javascript nmap <leader>B Odebugger;<ESC>==
+autocmd FileType cucumber nmap <leader>ns oThen I will write new steps<ESC>==
+autocmd FileType cucumber nmap <leader>nS OThen I will write new steps<ESC>==
+
+" test suite shortcuts
+nnoremap <leader>zsp :Dispatch zsh -i -c 'zsp %:p'<cr>
+nnoremap <leader>cc :Dispatch zsh -i -c 'cc %:p'<cr>

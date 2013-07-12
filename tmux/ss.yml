@@ -1,0 +1,8 @@
+project_name: ss
+project_root: ~/Workspace/SameSystem
+tabs:
+  - vim: vim
+  - zsh: zsh
+  - zs: sleep 2; zs
+  - zc: sleep 2; zc
+  - zst: zweep; zst

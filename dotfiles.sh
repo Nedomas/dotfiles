@@ -5,6 +5,7 @@ BACKUP_DIR="$HOME/backup_dotfiles"
 
 [[ -e "${HOME}/bin" ]] || mkdir -p "${HOME}/bin"
 [[ -e "${HOME}/.oh-my-zsh/themes" ]] || mkdir -p "${HOME}/.oh-my-zsh/themes"
+[[ -e "${HOME}/.tmuxinator" ]] || mkdir -p "${HOME}/.tmuxinator"
 
 link() {
   if [[ -e "${HOME}/${2}" ]]; then
@@ -21,10 +22,11 @@ echo 'symlinking dotfiles'
 link "zshrc" ".zshrc"
 link "vimrc" ".vimrc"
 link "vim" ".vim"
-link "tmux.conf" ".tmux.conf"
+link "tmux/tmux.conf" ".tmux.conf"
+link "tmux/ss.yml" ".tmuxinator/ss.yml"
 link "gitconfig" ".gitconfig"
 link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
-link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
+# link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
 link "ackrc" ".ackrc"
 
 # vim plugin manager

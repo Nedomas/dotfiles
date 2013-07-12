@@ -37,15 +37,23 @@ ubuntu_function() {
   sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoclean -y && sudo apt-get autoremove -y
 }
 
+z_function() {
+  cwd=$PWD
+  while [[ ! -f "$cwd/Rakefile" && ! -f "$cwd/Gemfile" && ! -d "$cwd/app" && ! -d "$cwd/config" && ! -d "$cwd/db" && "$cwd" != "${HOME}/Workspace/SameSystem" ]]
+  do
+    cwd=${cwd%\/*}
+  done
+  (cd $cwd && zeus $*)
+}
 # aliases
 
-alias z="zeus"
-alias zst="zeus start"
-alias zs="zeus s"
-alias zc="zeus c"
-alias cc="zeus cucumber --f pretty"
+alias z=z_function
+alias zst="z start"
+alias zs="z s"
+alias zc="z c"
+alias cc="z cucumber --f pretty"
 alias zweep="rm .zeus.sock"
-alias zsp="zeus rspec"
+alias zsp="z rspec"
 alias cs33="rails s -e cucumber -p 3333"
 alias c33="cucumber --f pretty"
 alias colad="cola dag"
@@ -69,6 +77,11 @@ alias ubuntu=ubuntu_function
 alias sqlyog="wine ~/.wine/drive_c/Program\ Files\ \(x86\)/SQLyog/SQLyog.exe"
 alias wtf="same; tail -f log/application.log"
 alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'
+alias dot='cd $HOME/dotfiles'
+alias tk='tmux kill-session'
+alias tm='tmux'
+alias tss='mux ss'
+alias tls='tmux ls'
 
 # Random prompt settings
 export HISTFILESIZE=1000
@@ -83,4 +96,5 @@ export LC_ALL="en_US.UTF-8"
 # source PATH & workspace-specific settings
 source $HOME/.custom
 export PATH=$PATH:$HOME/bin
-
+export EDITOR='vim'
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator

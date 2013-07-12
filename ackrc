@@ -4,8 +4,8 @@
 --type-add=js=.js.erb,.coffee
 --type-set=cucumber=.feature
 --type-set=c=.c,.cpp,.ino,.pde,.h
---ignore-dir=vendor
---ignore-dir=backups
+--ignore-dir=vendor/
+--ignore-dir=backups/
 --ignore-dir=log
 --ignore-dir=tmp
 --smart-case
