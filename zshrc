@@ -45,6 +45,10 @@ z_function() {
   done
   (cd $cwd && zeus $*)
 }
+
+gg_function() {
+  git commit -a -v -m "$*"
+}
 # aliases
 
 alias z=z_function
@@ -57,11 +61,20 @@ alias zsp="z rspec"
 alias cs33="rails s -e cucumber -p 3333"
 alias c33="cucumber --f pretty"
 alias colad="cola dag"
+alias r="rake"
+alias rg="rails generate"
+alias rmig="rake db:migrate"
+alias bi="bundle update"
+alias bu="bundle update"
+alias c=cd
+alias v=vim
 
-alias gfe="g fetch"
+alias gs="gst"
+alias gf="g fetch"
 alias gcob="gco -b"
 alias gad="ga ."
 alias gpoh="gp origin HEAD"
+alias gg=gg_function
 # f.e. "gro master" rebases from origin/master
 alias gro=gro_function
 # boxstart yourmachinenamegoeshere
@@ -82,6 +95,15 @@ alias tk='tmux kill-session'
 alias tm='tmux'
 alias tss='mux ss'
 alias tls='tmux ls'
+
+# Dotfiles accessors
+alias vrc="vim ~/.vimrc && source ~/.vimrc"
+alias zrc="vim ~/.zshrc && source ~/.zshrc"
+alias crc="vim ~/.custom && source ~/.custom"
+alias tmx="vim ~/.tmux.conf && source ~/.tmux.conf"
+alias muxss="vim ~/.tmuxinator/ss.yml && source ~/.tmuxinator/ss.yml"
+alias arc="vim ~/.ackrc && source ~/.ackrc"
+
 
 # Random prompt settings
 export HISTFILESIZE=1000

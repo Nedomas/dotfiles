@@ -1,10 +1,6 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-" Change leader to a comma because the backslash is too far away
-" That means all \x commands turn into ,x
-" The mapleader has to be set before neobundle starts loading all
-" the plugins.
 let mapleader=","
 
 " ================ Plugin stuff ====================
@@ -22,25 +18,23 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " main bundles
 NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \     'windows' : 'make -f make_mingw32.mak',
-  \     'cygwin' : 'make -f make_cygwin.mak',
-  \     'mac' : 'make -f make_mac.mak',
-  \     'unix' : 'make -f make_unix.mak',
-  \   },
-  \ }
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \   },
+      \ }
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'mhinz/vim-startify'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'mhinz/vim-tmuxify'
 
 " language-specific
@@ -60,11 +54,18 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'milkypostman/vim-togglelist'
+" SnipMate dependencies
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'nelstrom/vim-visual-star-search'
 
 NeoBundleCheck
 
@@ -89,26 +90,34 @@ let g:airline_section_c="%f"
 let g:airline_section_x=""
 " put filetype in fifth section
 let g:airline_section_y="%Y"
+let g:bufferline_echo = 0
+let g:airline_theme='dark'
+let g:airline_enable_fugitive=1
+let g:airline_enable_syntastic=1
 
 " Unite
 " use ack in unite grep source
 let g:unite_source_grep_command = 'ack'
-let g:vendorunite_source_rec_async_command = 'ack -f --nofilter --ackrc=~/.ackrc'
-
+let g:unite_source_grep_default_opts = "--ackrc=$HOME/.ackrc"
+let g:unite_source_rec_async_command = 'ack -g --nofilter --ackrc=$HOME/.ackrc'
+let g:unite_source_file_rec_max_cache_files = 9000
+call unite#custom#source('buffer,file,file_mru,file_rec', 'sorters', 'sorter_rank')
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+let g:unite_source_history_yank_enable = 1
 noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 noremap <leader>/ :<C-u>Unite -no-split -buffer-name=grep -start-insert grep:.<cr>
-let g:unite_source_history_yank_enable = 1
-noremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
-noremap <leader>s :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+noremap <leader>y :<C-u>Unite -no-split -buffer-name=yank -start-insert history/yank<cr>
+noremap <leader>s :<C-u>Unite -no-split -buffer-name=buffer -start-insert buffer<cr>
+
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
   " Play nice with supertab
   let b:SuperTabDisabled=1
   " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <buffer> <C-j> <Plug>(unite_select_next_line)
+  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
 endfunction
 
 " Fugitive
@@ -116,14 +125,21 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
-" ================ Various stuff ====================
+
+" Tmuxify
+let g:tmuxify_run = {
+      \ 'cucumber': 'cc %',
+      \ 'ruby': 'zsp %',
+      \}
+nnoremap <silent> <leader>mm :txkill <bar> txcreate <bar> txrun<cr>
+" ================ various stuff ====================
 
 set bg=dark
 colorscheme solarized
-if $COLORTERM == 'gnome-terminal'
+set t_co=256
+if $colorterm == 'gnome-terminal'
   set term=xterm-256color
   let g:solarized_termcolors=256
-  set t_Co=256
 endif
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -134,45 +150,45 @@ set autoindent
 set showmatch
 set nowrap
 set backupdir=~/.tmp
-set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
+set directory=~/.tmp " don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
-set guioptions-=T
+set guioptions-=t
 set et
 set smarttab
 set noincsearch
 set ignorecase smartcase
-set laststatus=2  " Always show status line.
+set laststatus=2  " always show status line.
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
-set number " Line numbers are good
-set showmode " Show current mode down the bottom
-set gcr=a:blinkon0 " Disable cursor blink
-set visualbell " No sounds
-set autoread " Reload files changed outside vim
-set noesckeys " Get rid of the delay when hitting esc!
-" This makes vim act like all other editors, buffers can
+set number " line numbers are good
+set showmode " show current mode down the bottom
+set gcr=a:blinkon0 " disable cursor blink
+set visualbell " no sounds
+set autoread " reload files changed outside vim
+set noesckeys " get rid of the delay when hitting esc!
+" this makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 set hidden
 set timeoutlen=500
 
-" ================ Turn Off Swap Files ==============
+" ================ turn off swap files ==============
 
 set noswapfile
 set nobackup
 set nowb
 
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
+" ================ persistent undo ==================
+" keep undo history across sessions, by storing in file.
+" only works all the time.
 
 silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
 set undofile
 
-" ================ Indentation ======================
+" ================ indentation ======================
 
 set autoindent
 set smartindent
@@ -185,71 +201,74 @@ set expandtab
 filetype plugin on
 filetype indent on
 
-" Display tabs and trailing spaces visually
+" display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
 " delete trailing spaces on save
-au BufWritePre * :%s/\s\+$//e
+au bufwritepre * :%s/\s\+$//e
 
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
+set nowrap       "don't wrap lines
+set linebreak    "wrap lines at convenient points
 
-" ================ Folds ============================
+" ================ folds ============================
 
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
-" ================ Completion =======================
+" ================ completion =======================
 
 set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+"enable ctrl-n and ctrl-p to scroll thru matches
+set wildmenu
+" stuff to ignore when tab completing
+set wildignore=*.o,*.obj,*~
 set wildignore+=*vim/backups*
 set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
+set wildignore+=*ds_store*
+set wildignore+=vendor/**
 set wildignore+=*.gem
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
-" ================ Scrolling ========================
+" ================ scrolling ========================
 
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+"start scrolling when we're 8 lines away from margins
+set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
-" ================ Scripts ========================
+" ================ scripts ========================
 source ~/.vim/scripts/js.vim
 source ~/.vim/scripts/vim.vim
 
-" ================ Mappings ========================
+" ================ mappings ========================
 
 " ignore desperate arrow keys
-no <Up> <NOP>
-no <Down> <NOP>
-no <Left> <NOP>
-no <Right> <NOP>
-ino <Up> <NOP>
-ino <Down> <NOP>
-ino <Left> <NOP>
-ino <Right> <NOP>
-vno <Up> <NOP>
-vno <Down> <NOP>
-vno <Left> <NOP>
-vno <Right> <NOP>
+no <up> <nop>
+no <down> <nop>
+no <left> <nop>
+no <right> <nop>
+ino <up> <nop>
+ino <down> <nop>
+ino <left> <nop>
+ino <right> <nop>
+vno <up> <nop>
+vno <down> <nop>
+vno <left> <nop>
+vno <right> <nop>
 
-map <Leader>r :call RenameFile()<cr>
-nnoremap <leader>nt :NERDTreeToggle<cr>
-nnoremap <F6> :GundoToggle<CR>
+imap jj <esc>
+map <leader>r :call renamefile()<cr>
+nnoremap <leader>nt :nerdtreetoggle<cr>
+nnoremap <f6> :gundotoggle<cr>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
 map <leader>ev :vsp<space>
 
-nnoremap <leader>vrc :e $MYVIMRC<cr>
-nnoremap <leader>zsh :e ~/.zshrc<cr>
-nnoremap <leader>cst :e ~/.custom<cr>
+nnoremap <leader>vrc :e $myvimrc<cr>
+nnoremap <leader>zrc :e ~/.zshrc<cr>
+nnoremap <leader>crc :e ~/.custom<cr>
 nnoremap <leader>tmx :e ~/.tmux.conf<cr>
 nnoremap <leader>muxss :e ~/.tmuxinator/ss.yml<cr>
 nnoremap <leader>arc :e ~/.ackrc<cr>
@@ -265,6 +284,7 @@ nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gp :Git push<cr>
 
 " insert binding tags
 autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
@@ -282,3 +302,33 @@ autocmd FileType cucumber nmap <leader>nS OThen I will write new steps<ESC>==
 " test suite shortcuts
 nnoremap <leader>zsp :Dispatch zsh -i -c 'zsp %:p'<cr>
 nnoremap <leader>cc :Dispatch zsh -i -c 'cc %:p'<cr>
+
+" After whitespace, insert the current directory into a command-line path
+cnoremap <expr> <C-P> getcmdline()[getcmdpos()-2] ==# ' ' ? expand('%:p:h') : "\<C-P>"
+
+" set text wrapping toggles
+nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+
+" Swap two words
+nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
+
+" toggle paste mode
+nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
+imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
+
+" FORMAT the entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
+
+" upper/lower word
+nnoremap <leader>u mQviwU`Q
+nnoremap <leader>l mQviwu`Q
+
+" upper/lower First char of word
+nnoremap <leader>U mQgewvU`Q
+nnoremap <leader>L mQgewvu`Q
+
+" split lines
+nnoremap K i<CR><Esc>
+
+" toggle hlsearch
+nmap <leader>hl :set hlsearch! hlsearch?<CR>
