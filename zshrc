@@ -97,12 +97,12 @@ alias tss='mux ss'
 alias tls='tmux ls'
 
 # Dotfiles accessors
-alias vrc="vim ~/.vimrc && source ~/.vimrc"
+alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc && source ~/.zshrc"
 alias crc="vim ~/.custom && source ~/.custom"
-alias tmx="vim ~/.tmux.conf && source ~/.tmux.conf"
-alias muxss="vim ~/.tmuxinator/ss.yml && source ~/.tmuxinator/ss.yml"
-alias arc="vim ~/.ackrc && source ~/.ackrc"
+alias tmx="vim ~/.tmux.conf"
+alias muxss="vim ~/.tmuxinator/ss.yml"
+alias arc="vim ~/.ackrc"
 
 
 # Random prompt settings

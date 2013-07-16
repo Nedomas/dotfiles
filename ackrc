@@ -9,8 +9,8 @@
 --type-add=js=.js.erb,.coffee
 --type-set=cucumber=.feature
 --type-set=c=.c,.cpp,.ino,.pde,.h
---ignore-dir=vendor
---ignore-dir=ckeditor
+--ignore-dir=vendor/**
+--ignore-dir=ckeditor/
 --ignore-dir=bundle
 --ignore-dir=log
 --ignore-dir=tmp

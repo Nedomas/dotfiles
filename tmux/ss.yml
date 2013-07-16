@@ -1,6 +1,6 @@
 # ~/.tmuxinator/ss.yml
 project_name: ss
-project_root: ~/Developer/samesystem
+project_root: ~/Workspace/SameSystem
 tabs:
   - vim: vim
   - zsh: ls

@@ -101,8 +101,10 @@ let g:unite_source_grep_command = 'ack'
 let g:unite_source_grep_default_opts = "--ackrc=$HOME/.ackrc"
 let g:unite_source_rec_async_command = 'ack -g --nofilter --ackrc=$HOME/.ackrc'
 let g:unite_source_file_rec_max_cache_files = 9000
+let g:unite_source_file_rec_ignore_pattern = '\(/vendor/\|\/dhtml_calendar/\|\/ckeditor/\)'
 call unite#custom#source('buffer,file,file_mru,file_rec', 'sorters', 'sorter_rank')
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
 let g:unite_source_history_yank_enable = 1
 noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
@@ -131,7 +133,8 @@ let g:tmuxify_run = {
       \ 'cucumber': 'cc %',
       \ 'ruby': 'zsp %',
       \}
-nnoremap <silent> <leader>mm :txkill <bar> txcreate <bar> txrun<cr>
+let g:tmuxify_pane_size = '20'
+nnoremap <silent> <leader>mm :TxKill <bar> TxCreate <bar> TxRun<cr>
 " ================ various stuff ====================
 
 set bg=dark
@@ -259,14 +262,14 @@ vno <left> <nop>
 vno <right> <nop>
 
 imap jj <esc>
-map <leader>r :call renamefile()<cr>
-nnoremap <leader>nt :nerdtreetoggle<cr>
+map <leader>r :call RenameFile()<cr>
+nnoremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <f6> :gundotoggle<cr>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
 map <leader>ev :vsp<space>
 
-nnoremap <leader>vrc :e $myvimrc<cr>
+nnoremap <leader>vrc :e $MYVIMRC<cr>
 nnoremap <leader>zrc :e ~/.zshrc<cr>
 nnoremap <leader>crc :e ~/.custom<cr>
 nnoremap <leader>tmx :e ~/.tmux.conf<cr>
@@ -284,7 +287,8 @@ nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gu :<cr>
+nnoremap <leader>gp :Git push origin HEAD<cr>
 
 " insert binding tags
 autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
@@ -298,16 +302,9 @@ autocmd FileType cucumber nmap <leader>B OWhen I use pry<ESC>==
 autocmd FileType javascript nmap <leader>B Odebugger;<ESC>==
 autocmd FileType cucumber nmap <leader>ns oThen I will write new steps<ESC>==
 autocmd FileType cucumber nmap <leader>nS OThen I will write new steps<ESC>==
-
-" test suite shortcuts
-nnoremap <leader>zsp :Dispatch zsh -i -c 'zsp %:p'<cr>
-nnoremap <leader>cc :Dispatch zsh -i -c 'cc %:p'<cr>
-
-" After whitespace, insert the current directory into a command-line path
-cnoremap <expr> <C-P> getcmdline()[getcmdpos()-2] ==# ' ' ? expand('%:p:h') : "\<C-P>"
-
-" set text wrapping toggles
-nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+autocmd FileType cucumber nmap <leader>jq oAnd I wait for jQuery<ESC>==
+" remove all binding tags
+nmap <leader>rb :g/pry/d <bar> g/debugger/d<cr>
 
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
