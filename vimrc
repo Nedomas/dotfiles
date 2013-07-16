@@ -133,8 +133,10 @@ let g:tmuxify_run = {
       \ 'cucumber': 'cc %',
       \ 'ruby': 'zsp %',
       \}
-let g:tmuxify_pane_size = '20'
-nnoremap <silent> <leader>mm :TxKill <bar> TxCreate <bar> TxRun<cr>
+let g:tmuxify_pane_size = '30'
+nnoremap <silent> <leader>cc :TxSetRunCmd 'cc %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+nnoremap <silent> <leader>c33 :TxSetRunCmd 'c33 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+nnoremap <silent> <leader>rsp :TxSetRunCmd 'rsp %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
 " ================ various stuff ====================
 
 set bg=dark
@@ -287,21 +289,30 @@ nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gu :<cr>
+nnoremap <leader>gu :Git pull --rebase<cr>
 nnoremap <leader>gp :Git push origin HEAD<cr>
 
+" deploy shortcuts
+nnoremap <leader>cpl :!cap to_live deploy<cr>
+nnoremap <leader>cpm :!cap to_test deploy<cr>
+
 " insert binding tags
-autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
-autocmd FileType cucumber imap <leader>b When I use pry<ESC>==o
-autocmd FileType javascript imap <leader>b debugger;<ESC>==o
 autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
-autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
-autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
-autocmd FileType ruby nmap <leader>B Obinding.pry<ESC>==
+autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
+
 autocmd FileType cucumber nmap <leader>B OWhen I use pry<ESC>==
+autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
+autocmd FileType cucumber imap <leader>b When I use pry<ESC>==o
+
 autocmd FileType javascript nmap <leader>B Odebugger;<ESC>==
-autocmd FileType cucumber nmap <leader>ns oThen I will write new steps<ESC>==
+autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
+autocmd FileType javascript imap <leader>b debugger;<ESC>==o
+
+autocmd FileType eruby nmap <leader>B O<% binding.pry %><ESC>==
+autocmd FileType ruby vmap <leader>b $A<cr>end<ESC>gv`<IPry.rescue do<cr><ESC>
+
 autocmd FileType cucumber nmap <leader>nS OThen I will write new steps<ESC>==
+autocmd FileType cucumber nmap <leader>ns oThen I will write new steps<ESC>==
 autocmd FileType cucumber nmap <leader>jq oAnd I wait for jQuery<ESC>==
 " remove all binding tags
 nmap <leader>rb :g/pry/d <bar> g/debugger/d<cr>
