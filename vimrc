@@ -135,8 +135,10 @@ let g:tmuxify_run = {
       \}
 let g:tmuxify_pane_size = '30'
 nnoremap <silent> <leader>cc :TxSetRunCmd 'cc %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
-nnoremap <silent> <leader>c33 :TxSetRunCmd 'c33 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
-nnoremap <silent> <leader>rsp :TxSetRunCmd 'rsp %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+nnoremap <silent> <leader>hcc :TxSetRunCmd 'HEADLESS=true cc %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+nnoremap <silent> <leader>c3 :TxSetRunCmd 'c3 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+nnoremap <silent> <leader>hc3 :TxSetRunCmd 'HEADLESS=true c3 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
 " ================ various stuff ====================
 
 set bg=dark
@@ -297,6 +299,7 @@ nnoremap <leader>cpl :!cap to_live deploy<cr>
 nnoremap <leader>cpm :!cap to_test deploy<cr>
 
 " insert binding tags
+autocmd FileType ruby nmap <leader>B Obinding.pry<ESC>==
 autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
 autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
 
