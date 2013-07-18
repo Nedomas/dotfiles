@@ -93,6 +93,7 @@ alias sqlyog="wine ~/.wine/drive_c/Program\ Files\ \(x86\)/SQLyog/SQLyog.exe"
 alias wtf="same; tail -f log/application.log"
 alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'
 alias dot='cd $HOME/dotfiles'
+alias dev='cd $HOME/Developer'
 alias tk='tmux kill-session'
 alias tm='tmux'
 alias tss='mux ss'
