@@ -1,3 +1,5 @@
+# make zsh start up faster | update manually with upgrade_oh_my_zsh
+DISABLE_AUTO_UPDATE="true"
 # zsh configuration
 ZSH=$HOME/.oh-my-zsh
 # theme for prefix & suffix
