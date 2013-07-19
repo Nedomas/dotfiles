@@ -1,0 +1,38 @@
+boxstart_function() {
+  VBoxManage startvm "$@" --type headless
+}
+
+boxgo_function() {
+  boxstart_function Jenkins1
+  boxstart_function Jenkins2
+}
+
+boxstop_function() {
+  boxsoft_function Jenkins1
+  boxsoft_function Jenkins2
+}
+
+boxsoft_function() {
+  VBoxManage controlvm "$@" acpipowerbutton
+}
+
+boxhard_function() {
+  VBoxManage controlvm "$@" poweroff
+}
+
+doctor_function() {
+  sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoclean -y && sudo apt-get autoremove -y
+}
+
+# boxstart yourmachinenamegoeshere
+alias boxstart=boxstart_function
+alias boxgo=boxgo_function
+alias boxstop=boxstop_function
+# "soft" shutdown
+alias boxsoft=boxsoft_function
+# "hard" shutdown
+alias boxhard=boxhard_function
+
+alias sqlyog="wine ~/.wine/drive_c/Program\ Files\ \(x86\)/SQLyog/SQLyog.exe"
+alias wtf="same; tail -f log/application.log"
+alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'
