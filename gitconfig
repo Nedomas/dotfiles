@@ -15,3 +15,5 @@
   ch = checkout -
 [merge]
 	tool = vimdiff
+[core]
+	excludesfile = ~/.gitignore

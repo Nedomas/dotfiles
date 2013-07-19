@@ -106,6 +106,8 @@ alias tmx="vim ~/.tmux.conf"
 alias muxss="vim ~/.tmuxinator/ss.yml"
 alias arc="vim ~/.ackrc"
 
+# Generate ctags
+alias gctags="bundle show --paths | xargs ctags -R"
 
 # Random prompt settings
 export HISTFILESIZE=1000
