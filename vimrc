@@ -1,7 +1,6 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-let mapleader=","
 
 " ================ Plugin stuff ====================
 
@@ -14,58 +13,33 @@ endif
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " main bundles
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \   },
-      \ }
-NeoBundle 'Shougo/vimshell.vim'
-" NeoBundle 'bling/vim-airline'
-NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'mileszs/ack.vim'
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-endwise'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'tomtom/tcomment_vim'
-" NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'wincent/Command-T'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'airblade/vim-gitgutter'
+
+" tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'mhinz/vim-tmuxify'
 
-" language-specific
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'vim-scripts/ruby-matchit'
-" NeoBundle 'ecomba/vim-ruby-refactoring'
-NeoBundle 'tpope/vim-endwise'
+" ruby
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'slim-template/vim-slim'
-" NeoBundle 'hail2u/vim-css3-syntax'
-" NeoBundle 'ap/vim-css-color'
-
-" other stuff
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-surround'
-" NeoBundle 'tpope/vim-abolish'
-" NeoBundle 'mattn/gist-vim'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'sjl/gundo.vim'
-" NeoBundle 'milkypostman/vim-togglelist'
-" SnipMate dependencies
-" NeoBundle 'MarcWeber/vim-addon-mw-utils'
-" NeoBundle 'tomtom/tlib_vim'
-" NeoBundle 'garbas/vim-snipmate'
-" NeoBundle 'honza/vim-snippets'
-" NeoBundle 'nelstrom/vim-visual-star-search'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'vim-scripts/ruby-matchit'
 
 NeoBundleCheck
 
@@ -81,49 +55,13 @@ augroup END
 
 " ================ Plugin settings ====================
 
-" Airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-" set second section to filename
-" & empty fourth section
-let g:airline_section_c="%f"
-let g:airline_section_x=""
-" put filetype in fifth section
-let g:airline_section_y="%Y"
-let g:bufferline_echo = 0
-let g:airline_theme='dark'
-let g:airline_enable_fugitive=1
-let g:airline_enable_syntastic=1
-
-" Unite
-" use ack in unite grep source
-let g:unite_source_grep_command = 'ack'
-let g:unite_source_grep_default_opts = "--ackrc=$HOME/.ackrc"
-let g:unite_source_rec_async_command = 'ack -g --nofilter --ackrc=$HOME/.ackrc'
-let g:unite_source_file_rec_max_cache_files = 9000
-let g:unite_source_file_rec_ignore_pattern = '\(/vendor/\|\/dhtml_calendar/\|\/ckeditor/\)'
-call unite#custom#source('buffer,file,file_mru,file_rec', 'sorters', 'sorter_rank')
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-
-let g:unite_source_history_yank_enable = 1
-noremap <leader>p :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
-noremap <leader>/ :<C-u>Unite -no-split -buffer-name=grep -start-insert grep:.<cr>
-noremap <leader>y :<C-u>Unite -no-split -buffer-name=yank -start-insert history/yank<cr>
-noremap <leader>s :<C-u>Unite -no-split -buffer-name=buffer -start-insert buffer<cr>
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j> <Plug>(unite_select_next_line)
-  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-endfunction
+let NERDTreeShowHidden = 1
 
 " Fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" Ag
+let g:agprg="ag -p ~/dotfiles/agignore --column"
 
 " Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
@@ -139,7 +77,10 @@ nnoremap <silent> <leader>hcc :TxSetRunCmd 'HEADLESS=true cc %' <bar> TxKill <ba
 nnoremap <silent> <leader>c3 :TxSetRunCmd 'c3 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
 nnoremap <silent> <leader>hc3 :TxSetRunCmd 'HEADLESS=true c3 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
 nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+
 " ================ various stuff ====================
+
+let mapleader=","
 
 set bg=dark
 colorscheme solarized
@@ -149,8 +90,10 @@ if $colorterm == 'gnome-terminal'
   let g:solarized_termcolors=256
 endif
 
+" ignore tags for command-t
+set wildignore+=.git,vendor/**,dhtml_calendar/**,ckeditor/**,bundle/**,log,tmp
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set history=1000
+set history=500
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
 set autoindent
@@ -175,11 +118,18 @@ set gcr=a:blinkon0 " disable cursor blink
 set visualbell " no sounds
 set autoread " reload files changed outside vim
 set noesckeys " get rid of the delay when hitting esc!
-" this makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
+set hidden " let buffers exist hidden
 set timeoutlen=500
+
+set laststatus=2
+set statusline=\ "
+set statusline+=%f\ " file name
+set statusline+=[
+set statusline+=%{strlen(&ft)?&ft:'none'} " filetype
+set statusline+=]
+set statusline+=%h%1*%m%r%w%0* " flag
+set statusline+=%= " right align
+set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
 
 " ================ turn off swap files ==============
 
@@ -216,27 +166,11 @@ au bufwritepre * :%s/\s\+$//e
 set nowrap       "don't wrap lines
 set linebreak    "wrap lines at convenient points
 
-" ================ folds ============================
-
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
-
 " ================ completion =======================
 
 set wildmode=list:longest
 "enable ctrl-n and ctrl-p to scroll thru matches
 set wildmenu
-" stuff to ignore when tab completing
-set wildignore=*.o,*.obj,*~
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*ds_store*
-set wildignore+=vendor/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
 
 " ================ scrolling ========================
 
@@ -246,7 +180,6 @@ set sidescrolloff=15
 set sidescroll=1
 
 " ================ scripts ========================
-source ~/.vim/scripts/js.vim
 source ~/.vim/scripts/vim.vim
 
 " ================ mappings ========================
@@ -266,9 +199,9 @@ vno <left> <nop>
 vno <right> <nop>
 
 imap jj <esc>
+map <leader>f :Ag<space>
 map <leader>r :call RenameFile()<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
-nnoremap <f6> :gundotoggle<cr>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
 map <leader>ev :vsp<space>
@@ -277,8 +210,6 @@ nnoremap <leader>vrc :e $MYVIMRC<cr>
 nnoremap <leader>zrc :e ~/.zshrc<cr>
 nnoremap <leader>crc :e ~/.custom<cr>
 nnoremap <leader>tmx :e ~/.tmux.conf<cr>
-nnoremap <leader>muxss :e ~/.tmuxinator/ss.yml<cr>
-nnoremap <leader>arc :e ~/.ackrc<cr>
 
 imap <leader>' ''<ESC>i
 imap <leader>" ""<ESC>i
@@ -301,15 +232,12 @@ nnoremap <leader>cpm :!cap to_test deploy<cr>
 " insert binding tags
 autocmd FileType ruby nmap <leader>B Obinding.pry<ESC>==
 autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
-autocmd FileType ruby imap <leader>b binding.pry<ESC>==o
 
 autocmd FileType cucumber nmap <leader>B OWhen I use pry<ESC>==
 autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
-autocmd FileType cucumber imap <leader>b When I use pry<ESC>==o
 
 autocmd FileType javascript nmap <leader>B Odebugger;<ESC>==
 autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
-autocmd FileType javascript imap <leader>b debugger;<ESC>==o
 
 autocmd FileType eruby nmap <leader>B O<% binding.pry %><ESC>==
 autocmd FileType ruby vmap <leader>b $A<cr>end<ESC>gv`<IPry.rescue do<cr><ESC>
@@ -323,23 +251,11 @@ nmap <leader>rb :g/pry/d <bar> g/debugger/d<cr>
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 
-" toggle paste mode
-nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
-imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
-
-" FORMAT the entire file
-nnoremap <leader>fef :normal! gg=G``<CR>
-
-" upper/lower word
-nnoremap <leader>u mQviwU`Q
-nnoremap <leader>l mQviwu`Q
-
-" upper/lower First char of word
-nnoremap <leader>U mQgewvU`Q
-nnoremap <leader>L mQgewvu`Q
-
 " split lines
 nnoremap K i<CR><Esc>
 
 " toggle hlsearch
 nmap <leader>hl :set hlsearch! hlsearch?<CR>
+
+nnoremap <leader>h <Esc>:call EasyMode()<CR>
+nnoremap <leader>H <Esc>:call HardMode()<CR>

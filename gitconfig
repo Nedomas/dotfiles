@@ -3,8 +3,6 @@
 	email = domas.bitvinskas@me.com
 [github]
 	user = Nedomas
-[diff]
-  external = git_diff_wrapper
 [pager]
   diff =
 [color]

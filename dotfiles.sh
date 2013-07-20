@@ -28,7 +28,6 @@ link "gitconfig" ".gitconfig"
 link "gitignore_global" ".gitignore_global"
 link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
 # link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
-link "ackrc" ".ackrc"
 
 # vim plugin manager
 if [ ! -d $DOTFILES_ROOT/vim/bundle ]; then

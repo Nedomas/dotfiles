@@ -1,4 +1,4 @@
-# make zsh start up faster | update manually with upgrade_oh_my_zsh
+# make zsh start up faster | update manually with doctor
 DISABLE_AUTO_UPDATE="true"
 # zsh configuration
 ZSH=$HOME/.oh-my-zsh
@@ -26,16 +26,7 @@ z_function() {
   (cd $cwd && zeus $*)
 }
 
-gro_function() {
-  git fetch
-  git rebase origin/$@
-}
-
-gg_function() {
-  git commit -a -v -m "$*"
-}
 # aliases
-
 alias z=z_function
 alias zst="z start"
 alias zs="z s"
@@ -52,19 +43,50 @@ alias r="rake"
 alias rg="rails generate"
 alias rmig="rake db:migrate"
 alias bi="bundle install"
+alias be="bundle exec"
 alias bu="bundle update"
 alias c=cd
 alias v=vim
 alias doctor=doctor_function
 
-alias gs="gst"
-alias gf="g fetch"
+alias g=g_function
+alias gad='git add .'
+alias gaa='git add -A'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gcaa='git commit -a --amend -C HEAD'
+alias gcl='git clone'
+alias gcm='git commit -m'
+alias gco='git checkout'
 alias gcob="gco -b"
-alias gad="ga ."
-alias gpoh="gp origin HEAD"
-alias gg=gg_function
-# f.e. "gro master" rebases from origin/master
+alias gcv='git commit --verbose'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gf='g fetch'
+alias gg='git lg'
+alias gpoh='gp origin HEAD'
+alias gpush='git push'
+alias gpsuh='git push'
+alias gpr='git pull --rebase'
+alias grc='git rebase --continue'
+alias git-nuke=git-nuke_function
 alias gro=gro_function
+
+gro_function() {
+  git fetch
+  git rebase origin/$1
+}
+# refs to Ben Orenstein
+g_function() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+git-nuke_function() {
+  git branch -D $1 && git push origin :$1
+}
 
 alias dot='cd $HOME/dotfiles'
 alias tk='tmux kill-session'
@@ -78,10 +100,10 @@ alias zrc="vim ~/.zshrc && source ~/.zshrc"
 alias crc="vim ~/.custom && source ~/.custom"
 alias tmx="vim ~/.tmux.conf"
 alias muxss="vim ~/.tmuxinator/ss.yml"
-alias arc="vim ~/.ackrc"
 
 # generate ctags
-alias gctags="bundle show --paths | xargs ctags -R"
+alias rtags="ctags -R"
+alias gemtags="bundle show --paths | xargs ctags -R"
 
 # random prompt settings
 export HISTFILESIZE=1000
