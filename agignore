@@ -4,4 +4,6 @@ dhtml_calendar
 bundle
 log
 tmp
-sql
+sqls
+javascripts/spec
+tags
