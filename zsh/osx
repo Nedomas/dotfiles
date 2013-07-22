@@ -1,4 +1,4 @@
-mac_function() {
+doctor_function() {
   upgrade_oh_my_zsh && sudo rm -f /private/var/log/asl/*.asl
 }
 
