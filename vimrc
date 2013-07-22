@@ -40,6 +40,8 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/ruby-matchit'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'nono/vim-handlebars'
 
 NeoBundleCheck
 
@@ -201,6 +203,7 @@ vno <right> <nop>
 imap jj <esc>
 map <leader>f :Ag<space>
 map <leader>r :call RenameFile()<cr>
+nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
@@ -259,3 +262,4 @@ nmap <leader>hl :set hlsearch! hlsearch?<CR>
 
 nnoremap <leader>h <Esc>:call EasyMode()<CR>
 nnoremap <leader>H <Esc>:call HardMode()<CR>
+cmap w!! %!sudo tee > /dev/null
