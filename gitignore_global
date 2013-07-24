@@ -1,2 +1,4 @@
 config/cucumber.yml
+vendor/bundle
 tags
+.DS_Store

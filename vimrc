@@ -122,6 +122,7 @@ set autoread " reload files changed outside vim
 set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
+set cursorline
 
 set laststatus=2
 set statusline=\ "
