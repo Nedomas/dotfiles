@@ -50,6 +50,10 @@ alias bu="bundle update"
 alias c=cd
 alias v=vim
 alias doctor=doctor_function
+alias ks="karma start"
+alias kss="karma start --no-single-run"
+alias kr="karma run"
+alias ksc="karma start --browsers=ChromeCanary"
 
 alias g=g_function
 alias gad='git add .'
