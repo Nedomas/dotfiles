@@ -13,8 +13,6 @@ endif
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
 " main bundles
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
@@ -30,6 +28,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'mattn/emmet-vim'
 
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
@@ -47,8 +46,10 @@ NeoBundleCheck
 
 " ================ Ruby stuff ====================
 
-syntax on " Enable syntax highlighting
-filetype plugin indent on " Enable filetype-specific indenting and plugins
+" Enable syntax highlighting
+syntax on
+" Enable filetype-specific indenting and plugins
+filetype plugin indent on
 
 augroup myfiletypes
   " Clear old autocmds in group
@@ -84,7 +85,8 @@ nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <
 
 let mapleader=","
 
-set bg=dark
+set bg=light
+" set bg=dark
 colorscheme solarized
 set t_co=256
 if $colorterm == 'gnome-terminal'
@@ -166,8 +168,10 @@ set list listchars=tab:\ \ ,trail:·
 " delete trailing spaces on save
 au bufwritepre * :%s/\s\+$//e
 
-set nowrap       "don't wrap lines
-set linebreak    "wrap lines at convenient points
+"don't wrap lines
+set nowrap
+"wrap lines at convenient points
+set linebreak
 
 " ================ completion =======================
 
@@ -234,21 +238,15 @@ nnoremap <leader>cpl :!cap to_live deploy<cr>
 nnoremap <leader>cpm :!cap to_test deploy<cr>
 
 " insert binding tags
-autocmd FileType ruby nmap <leader>B Obinding.pry<ESC>==
 autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
 
-autocmd FileType cucumber nmap <leader>B OWhen I use pry<ESC>==
 autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
 
-autocmd FileType javascript nmap <leader>B Odebugger;<ESC>==
 autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
 
-autocmd FileType eruby nmap <leader>B O<% binding.pry %><ESC>==
-autocmd FileType ruby vmap <leader>b $A<cr>end<ESC>gv`<IPry.rescue do<cr><ESC>
+" Make it work someday
+" autocmd FileType ruby vmap <leader>b $A<cr>end<ESC>gv`<IPry.rescue do<cr><ESC>
 
-autocmd FileType cucumber nmap <leader>nS OThen I will write new steps<ESC>==
-autocmd FileType cucumber nmap <leader>ns oThen I will write new steps<ESC>==
-autocmd FileType cucumber nmap <leader>jq oAnd I wait for jQuery<ESC>==
 " remove all binding tags
 nmap <leader>rb :g/pry/d <bar> g/debugger/d<cr>
 
