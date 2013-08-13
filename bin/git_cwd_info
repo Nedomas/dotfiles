@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+def git_repo_path
+  @git_repo_path ||= begin
+    relative_path = `git rev-parse --git-dir 2>/dev/null`.strip
+    File.expand_path(relative_path) unless relative_path.empty?
+  end
+end
+
+def in_git_repo
+  !git_repo_path.nil? &&
+  git_repo_path != '/.git' &&
+  git_repo_path != '~' &&
+  git_repo_path != "#{ENV['HOME']}/.git"
+end
+
+def rebasing_etc
+  if File.exists?(File.join(git_repo_path, 'BISECT_LOG'))
+    "+bisect"
+  elsif File.exists?(File.join(git_repo_path, 'MERGE_HEAD'))
+    "+merge"
+  elsif %w[rebase rebase-apply rebase-merge ../.dotest].any? {|d| File.exists?(File.join(git_repo_path, d)) }
+    "+rebase"
+  end
+end
+
+if in_git_repo
+  print rebasing_etc
+end

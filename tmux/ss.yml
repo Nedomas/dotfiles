@@ -1,9 +1,0 @@
-# ~/.tmuxinator/ss.yml
-project_name: ss
-project_root: ~/Workspace/SameSystem
-tabs:
-  - vim: vim
-  - zsh: ls
-  - zs: sleep 5; zs
-  - zc: sleep 5; zc
-  - zst: ([[ ! -f ".zeus.sock" ]] || zweep); zst

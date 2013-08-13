@@ -6,7 +6,7 @@
 [pager]
   diff =
 [color]
-	ui = auto
+	ui = always
 [alias]
   st = status -a
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative
@@ -15,3 +15,8 @@
 	tool = vimdiff
 [core]
 	excludesfile = ~/.gitignore_global
+[alias]
+  l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+  unstage = reset HEAD
+  staged = diff --cached
+  unstaged = diff

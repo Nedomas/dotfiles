@@ -23,10 +23,10 @@ link "zshrc" ".zshrc"
 link "vimrc" ".vimrc"
 link "vim" ".vim"
 link "tmux/tmux.conf" ".tmux.conf"
-link "tmux/ss.yml" ".tmuxinator/ss.yml"
 link "gitconfig" ".gitconfig"
 link "gitignore_global" ".gitignore_global"
-link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
+link "bin" "bin"
+# link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
 # link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
 
 # vim plugin manager

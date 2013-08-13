@@ -55,15 +55,19 @@ alias kss="karma start --no-single-run"
 alias kr="karma run"
 
 alias g=g_function
+alias d='gd'
 alias gad='git add .'
+alias gau='git add . --update'
+alias gap='git add --patch'
 alias gaa='git add -A'
+alias gbr='git branch'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gcaa='git commit -a --amend -C HEAD'
 alias gcl='git clone'
 alias gcm='git commit -m'
 alias gco='git checkout'
-alias gcob="gco -b"
+alias gcob='gco -b'
 alias gcv='git commit --verbose'
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -77,6 +81,12 @@ alias grc='git rebase --continue'
 alias git-nuke=git-nuke_function
 alias gro=gro_function
 
+# git-smart gem
+alias gup='git smart-pull'
+alias gm='git smart-merge --no-ff'
+alias gmf='git smart-merge --ff-only'
+alias gl='git smart-log'
+
 gro_function() {
   git fetch
   git rebase origin/$1
@@ -86,7 +96,8 @@ g_function() {
   if [[ $# > 0 ]]; then
     git $@
   else
-    git status
+    echo "-- $fg[cyan]$(git rev-parse --abbrev-ref HEAD)"
+    git status --short
   fi
 }
 git-nuke_function() {
