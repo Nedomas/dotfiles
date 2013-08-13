@@ -105,6 +105,7 @@ git-nuke_function() {
 }
 
 alias dot='cd $HOME/dotfiles'
+alias dev='cd $HOME/Developer'
 alias tk='tmux kill-session'
 alias tm='tmux'
 alias tss='mux ss'

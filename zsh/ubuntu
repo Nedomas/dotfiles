@@ -1,3 +1,14 @@
+# Initial PATH
+# /home/domas/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+
+# By rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - --no-rehash)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+# By chromedriver
+export PATH="$HOME/Developer/tools/chromedriver:$PATH"
+
 boxstart_function() {
   VBoxManage startvm "$@" --type headless
 }
@@ -38,3 +49,11 @@ alias wtf="s; tail -f log/application.log"
 alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'
 alias a='ls -lrth --color'
 alias get='sudo apt-get install'
+alias s='cd ~/Developer/samesystem'
+
+# for solarized on ubuntu
+export TERM="screen-256color"
+# toggle background
+alias solarize='$HOME/Developer/tools/gnome-terminal-colors-solarized/solarize'
+alias tmux="tmux -2"
+alias ksc="karma start --browsers=Chrome"

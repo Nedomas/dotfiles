@@ -85,12 +85,12 @@ nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <
 
 let mapleader=","
 
-" set bg=light
-set bg=dark
+set bg=light
+" set bg=dark
 colorscheme solarized
-set t_co=256
+set t_Co=256
 if $colorterm == 'gnome-terminal'
-  set term=xterm-256color
+  set term=screen-256color
   let g:solarized_termcolors=256
 endif
 
@@ -125,6 +125,7 @@ set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
 set cursorline
+set cc=80
 
 set laststatus=2
 set statusline=\ "
