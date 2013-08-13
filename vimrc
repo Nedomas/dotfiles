@@ -37,7 +37,7 @@ NeoBundle 'mhinz/vim-tmuxify'
 " ruby
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'vim-ruby/vim-ruby'
+" NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nono/vim-handlebars'
