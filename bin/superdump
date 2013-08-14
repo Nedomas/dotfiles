@@ -1,0 +1,32 @@
+#!/bin/bash
+
+local=~/Developer/mysql
+local_mysql=$local/$@
+
+# rsync it home
+if [ ! -d "$local_mysql" ]; then
+  echo "Rsyncing for date $@"
+  time rsync -av samesystem@192.168.0.102:/var/backups/mysql/$@ $local
+  echo 'Done.'
+else
+  echo "Directory $@ seems to already exist!"
+fi
+
+# unzip all files
+echo 'Unziping files...'
+time find . -name "*.gz" -exec gzip {} \;
+echo 'Done.'
+
+date=$(echo $@ | tr -d '-')
+db="samesystem_$date"
+mysql -e "drop database $db"
+mysql -e "create database $db"
+echo "Gave birth to database $db"
+
+echo 'Importing schemas...'
+time ls $local_mysql | grep -v 'redmine' | grep 'schema.sql' | awk '{ print "source '$local_mysql'/"$0 }' | mysql $db --verbose --batch
+echo 'Done.'
+
+echo 'Importing the data...'
+time ls $local_mysql | grep -v 'redmine' | grep -v 'schema.sql' | grep -v 'metadata' | awk '{ print "source '$local_mysql'/"$0 }' | mysql $db --verbose --batch
+echo 'Done.'

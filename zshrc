@@ -4,7 +4,7 @@ DISABLE_AUTO_UPDATE="true"
 ZSH=$HOME/.oh-my-zsh
 # theme for prefix & suffix
 ZSH_THEME="mayhem"
-plugins=(git github autojump command-not-found rails3 bundler ruby)
+plugins=(git autojump vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # custom functions for custom platforms
@@ -17,14 +17,14 @@ elif [[ "$os" == "Linux" ]]; then
 fi
 
 # functions for aliases
-z_function() {
-  cwd=$PWD
-  while [[ ! -f "$cwd/Rakefile" && ! -f "$cwd/Gemfile" && ! -d "$cwd/app" && ! -d "$cwd/config" && ! -d "$cwd/db" && "$cwd" != "${HOME}/Workspace/SameSystem" ]]
-  do
-    cwd=${cwd%\/*}
-  done
-  (cd $cwd && zeus $*)
-}
+# z_function() {
+#   cwd=$PWD
+#   while [[ ! -f "$cwd/Rakefile" && ! -f "$cwd/Gemfile" && ! -d "$cwd/app" && ! -d "$cwd/config" && ! -d "$cwd/db" && "$cwd" != "${HOME}/Workspace/SameSystem" ]]
+#   do
+#     cwd=${cwd%\/*}
+#   done
+#   (cd $cwd && zeus $*)
+# }
 
 # aliases
 alias z=z_function
@@ -50,6 +50,7 @@ alias bu="bundle update"
 alias c=cd
 alias v=vim
 alias doctor=doctor_function
+
 alias ks="karma start"
 alias kss="karma start --no-single-run"
 alias kr="karma run"
@@ -119,8 +120,13 @@ alias tmx="vim ~/.tmux.conf"
 alias muxss="vim ~/.tmuxinator/ss.yml"
 
 # generate ctags
-alias rtags="ctags -R"
-alias gemtags="bundle show --paths | xargs ctags -R"
+alias gtags=gtags_function
+
+# idea: automate with bundle install
+gtags_function() {
+  ctags -R -f app.tags .
+  ctags -R -f gem.tags `bundle show --paths`
+}
 
 # random prompt settings
 export HISTFILESIZE=1000

@@ -9,6 +9,9 @@ export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 # By chromedriver
 export PATH="$HOME/Developer/tools/chromedriver:$PATH"
 
+# zsh plugins
+plugins=(command-not-found)
+
 boxstart_function() {
   VBoxManage startvm "$@" --type headless
 }

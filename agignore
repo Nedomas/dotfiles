@@ -6,4 +6,4 @@ log
 tmp
 sqls
 javascripts/spec
-tags
+*.tags

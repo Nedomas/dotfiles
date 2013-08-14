@@ -29,6 +29,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mattn/emmet-vim'
+" NeoBundle 'xolox/vim-easytags'
 
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
@@ -95,7 +96,8 @@ if $colorterm == 'gnome-terminal'
 endif
 
 " ignore tags for command-t
-set wildignore+=.git,vendor/**,dhtml_calendar/**,ckeditor/**,bundle/**,log,tmp
+set wildignore+=.git,vendor/**,dhtml_calendar/**,ckeditor/**,bundle/**,log,tmp,*.tags
+set tags+=app.tags,gem.tags
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500
 set ruler " show the cursor position all the time
