@@ -86,8 +86,8 @@ nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <
 
 let mapleader=","
 
-set bg=light
-" set bg=dark
+" set bg=light
+set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'

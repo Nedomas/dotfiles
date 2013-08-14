@@ -54,6 +54,7 @@ alias doctor=doctor_function
 alias ks="karma start"
 alias kss="karma start --no-single-run"
 alias kr="karma run"
+alias h='history'
 
 alias g=g_function
 alias d='gd'
@@ -72,6 +73,7 @@ alias gcob='gco -b'
 alias gcv='git commit --verbose'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gdl='git diff | less'
 alias gf='g fetch'
 alias gg='git lg'
 alias gpoh='gp origin HEAD'
@@ -81,12 +83,16 @@ alias gpr='git pull --rebase'
 alias grc='git rebase --continue'
 alias git-nuke=git-nuke_function
 alias gro=gro_function
+alias grhard='g reset --hard HEAD'
 
 # git-smart gem
 alias gup='git smart-pull'
 alias gm='git smart-merge --no-ff'
 alias gmf='git smart-merge --ff-only'
 alias gl='git smart-log'
+
+# ss backup
+alias lb='time load-backup -v'
 
 gro_function() {
   git fetch

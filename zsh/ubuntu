@@ -11,6 +11,8 @@ export PATH="$HOME/Developer/tools/chromedriver:$PATH"
 
 # zsh plugins
 plugins=(command-not-found)
+# By dotfiles
+export PATH="$HOME/bin:$PATH"
 
 boxstart_function() {
   VBoxManage startvm "$@" --type headless

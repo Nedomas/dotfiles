@@ -7,3 +7,4 @@ tmp
 sqls
 javascripts/spec
 *.tags
+jquery
