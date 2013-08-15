@@ -1,0 +1,10 @@
+redmine*
+metadata*
+*watched_exceptions.sql.gz
+*calendar_line_logs.sql.gz
+*fragment_logs.sql.gz
+*log_records.sql.gz
+*log_user_changes.sql.gz
+*delayed_jobs.sql.gz
+*email_queues.sql.gz
+*emails.sql.gz

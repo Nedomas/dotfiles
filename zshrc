@@ -1,8 +1,6 @@
 # make zsh start up faster | update manually with doctor
 DISABLE_AUTO_UPDATE="true"
-# zsh configuration
 ZSH=$HOME/.oh-my-zsh
-# theme for prefix & suffix
 ZSH_THEME="mayhem"
 plugins=(git autojump vi-mode)
 source $ZSH/oh-my-zsh.sh
@@ -15,16 +13,6 @@ if [[ "$os" == "Darwin" ]]; then
 elif [[ "$os" == "Linux" ]]; then
   source $HOME/dotfiles/zsh/ubuntu
 fi
-
-# functions for aliases
-# z_function() {
-#   cwd=$PWD
-#   while [[ ! -f "$cwd/Rakefile" && ! -f "$cwd/Gemfile" && ! -d "$cwd/app" && ! -d "$cwd/config" && ! -d "$cwd/db" && "$cwd" != "${HOME}/Workspace/SameSystem" ]]
-#   do
-#     cwd=${cwd%\/*}
-#   done
-#   (cd $cwd && zeus $*)
-# }
 
 # aliases
 alias z=zeus
@@ -114,9 +102,9 @@ git-nuke_function() {
 
 alias dot='cd $HOME/dotfiles'
 alias dev='cd $HOME/Developer'
+alias s='cd $HOME/Developer/samesystem'
 alias tk='tmux kill-session'
 alias tm='tmux'
-alias tss='mux ss'
 alias tls='tmux ls'
 
 # dotfiles accessors
@@ -124,7 +112,6 @@ alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc && source ~/.zshrc"
 alias crc="vim ~/.custom && source ~/.custom"
 alias tmx="vim ~/.tmux.conf"
-alias muxss="vim ~/.tmuxinator/ss.yml"
 
 # generate ctags
 alias gtags=gtags_function
@@ -145,7 +132,6 @@ unsetopt correct_all
 # fix zeus encoding error
 export LC_ALL="en_US.UTF-8"
 export EDITOR='vim'
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # source PATH & workspace-specific settings
 source $HOME/.custom

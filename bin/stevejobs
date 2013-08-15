@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [ $# -eq 0 ] ; then
+  echo 'You fool, specify date in format YYYY-MM-DD!'
+  exit 0
+fi
+
+local=$HOME/Developer/mysql
+local_mysql=$local/$@
+
+# rsync it home
+if [ ! -d "$local_mysql" ]; then
+  echo "Rsyncing for date $@"
+  time rsync -av --exclude-from="$HOME/dotfiles/stevejobs_exclude" samesystem@192.168.0.102:/var/backups/mysql/$@ $local
+  echo 'Done.'
+else
+  echo "Directory $@ already exist!"
+fi
+
+# unzip all files
+echo 'Unziping files...'
+time find . -name "*.gz" -exec gunzip {} \;
+echo 'Done.'
+
+date=$(echo $@ | tr -d '-')
+db="samesystem_$date"
+mysql -e "drop database $db"
+mysql -e "create database $db"
+mysql -e "set global sql_mode='NO_ENGINE_SUBSTITUTION'"
+echo "Gave birth to database $db"
+
+complete=$local/complete_$date
+mkdir $complete
+echo "Created dir $complete"
+
+echo '--- Importing schemas ---'
+schemas=$(ls $local_mysql | grep -v 'redmine' | grep 'schema.sql')
+
+for schema in $schemas
+do
+  echo "Importing schema $schema"
+  echo "source $local_mysql/$schema" | time mysql $db --batch
+  mv $schema $complete
+  echo "$schema imported."
+done
+echo 'Done.'
+
+skip='redmine|\schema|\metadata|\watched_exceptions|\calendar_line_logs|\fragment_logs|\log_records|\log_user_changes|\delayed_jobs|\email_queues|\emails'
+echo "Skipping $skip"
+
+echo '--- Importing the data ---'
+datafiles=$(ls $local_mysql | grep -v $skip)
+
+for file in $datafiles
+do
+  echo "Importing file $file"
+  echo "source $local_mysql/$file" | time mysql $db --batch
+  mv $file $complete
+  echo "$file imported."
+done
+
+echo 'Done.'
