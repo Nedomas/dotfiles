@@ -86,8 +86,8 @@ nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <
 
 let mapleader=","
 
-set bg=light
-" set bg=dark
+" set bg=light
+set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
@@ -96,7 +96,7 @@ if $colorterm == 'gnome-terminal'
 endif
 
 " ignore tags for command-t
-set wildignore+=.git,vendor/**,dhtml_calendar/**,ckeditor/**,bundle/**,log,tmp,*.tags
+set wildignore+=.git,**/vendor,**/dhtml_calendar,**/ckeditor,**/bundle,log,tmp,*.tags
 set tags+=app.tags,gem.tags
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500

@@ -1,0 +1,3 @@
+[submodule "bin/Sleepy-shell"]
+	path = bin/Sleepy-shell
+	url = https://github.com/Nedomas/Sleepy-shell.git

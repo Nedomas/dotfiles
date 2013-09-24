@@ -1,0 +1,70 @@
+#!/bin/sh
+# Sleep cycles.
+# Standard rhythm is 1.5, 3, 4.5, 6, 7.5 and 9 hours.
+# Average from going to bed to sleeping for human lifeforms is ~14 minutes.
+rhythm=(554 464 374 284 194 104)
+
+help() 
+{
+	cat <<EOF
+
+  USAGE:
+    sleepy [-h] [wake_up_time]
+
+  EXAMPLES:
+    sleepy 10:30
+    #=> TRY to go to bed @ 23:46 01:16 02:56 02:36 05:46 07:16
+    # sleepy without parameters returns the time to get up as if you would get to bed right now
+    sleepy
+    #=> TRY to get up @ 08:44 07:14 05:44 04:14 02:44 01:14
+
+EOF
+}
+
+sleep_now()
+{
+	output_groove=()
+	for groove in ${rhythm[@]}
+	do
+		# Add rhythm times to current time.
+		output_groove+=(`date -v+${groove}M "+%H:%M"`)
+	done
+	echo "TRY to get up @\033[32m" ${output_groove[*]}
+}
+
+wake_up_at()
+{
+	wake_up_time=$(date -jf "%H:%M" "$@" +%s)
+	output_groove=()
+
+	# If the specified wake up time is not today, then add 24 hours.
+	if [ $wake_up_time -lt $(date +%s) ]
+	then
+		wake_up_time=$(( wake_up_time + 24*60*60 ))
+	fi
+
+	# Add to output from each rhythm.
+	for groove in ${rhythm[@]}
+	do
+		groove_in_ms=($(( wake_up_time - groove * 60 )))
+		# It is impossible to go to sleep in the past.
+		if [ $groove_in_ms -gt $(date +%s) ]
+		then
+			output_groove+=($(date -jf "%s" "$groove_in_ms" +%H:%M))
+		fi
+	done
+	echo "TRY to go to bed @\033[32m" ${output_groove[*]}
+}
+
+# Route each request to different methods.
+if [ "$1" == "-h" ]
+then
+	help
+elif [ -z "$1" ]
+then
+	# If argument is empty => Go to sleep now.
+	sleep_now
+else
+	# If argument is something => Try to calculate the sleep time.
+	wake_up_at $@
+fi
