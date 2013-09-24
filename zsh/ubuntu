@@ -61,4 +61,4 @@ export TERM="screen-256color"
 # toggle background
 alias solarize='$HOME/Developer/tools/gnome-terminal-colors-solarized/solarize'
 alias tmux="tmux -2"
-alias ksc="karma start --browsers=Chrome"
+alias ksc="ks --browsers=Chrome"

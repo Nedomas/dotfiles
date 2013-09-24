@@ -27,9 +27,9 @@ fi
 # }
 
 # aliases
-alias z=z_function
+alias z=zeus
 alias zst="z start"
-alias zs="z s"
+alias zs="z s passenger"
 alias zc="z c"
 alias cc="z cucumber --f pretty"
 alias hcc="HEADLESS=true z cucumber --f pretty"
@@ -42,7 +42,8 @@ alias colad="cola dag"
 alias r="rake"
 alias rg="rails generate"
 alias rmig="rake db:migrate"
-alias rs="rails s"
+alias rs="rails s thin"
+# alias rs="passenger start"
 alias rc="rails c"
 alias bi="bundle install"
 alias be="bundle exec"
@@ -52,7 +53,7 @@ alias v=vim
 alias doctor=doctor_function
 
 alias ks="karma start"
-alias kss="karma start --no-single-run"
+alias kss="ks --no-single-run"
 alias kr="karma run"
 alias h='history'
 

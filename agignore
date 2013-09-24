@@ -8,3 +8,6 @@ sqls
 javascripts/spec
 *.tags
 jquery
+underscore.min.js
+json2.js
+watchtower
