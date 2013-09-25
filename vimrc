@@ -42,6 +42,7 @@ NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nono/vim-handlebars'
+NeoBundle 'slim-template/vim-slim'
 
 NeoBundleCheck
 
