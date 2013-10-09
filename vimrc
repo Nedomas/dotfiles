@@ -87,8 +87,8 @@ nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <
 
 let mapleader=","
 
-" set bg=light
-set bg=dark
+set bg=light
+" set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
@@ -128,7 +128,7 @@ set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
 set cursorline
-set cc=80
+set cc=90
 
 set laststatus=2
 set statusline=\ "
@@ -241,6 +241,9 @@ nnoremap <leader>gp :Git push origin HEAD<cr>
 nnoremap <leader>cpl :!cap to_live deploy<cr>
 nnoremap <leader>cpm :!cap to_test deploy<cr>
 
+nnoremap <leader>d :!zeal --query '
+nnoremap <leader>a :silent execute "!zeal --query '<cword>' &>/dev/null &" <bar> redraw!<CR>
+
 " insert binding tags
 autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
 
@@ -266,3 +269,8 @@ nmap <leader>hl :set hlsearch! hlsearch?<CR>
 nnoremap <leader>h <Esc>:call EasyMode()<CR>
 nnoremap <leader>H <Esc>:call HardMode()<CR>
 cmap w!! %!sudo tee > /dev/null
+nnoremap <leader>n :tab new<CR>
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+" Refactoring
+nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>

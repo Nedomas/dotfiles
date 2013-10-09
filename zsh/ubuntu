@@ -62,3 +62,6 @@ export TERM="screen-256color"
 alias solarize='$HOME/Developer/tools/gnome-terminal-colors-solarized/solarize'
 alias tmux="tmux -2"
 alias ksc="ks --browsers=Chrome"
+
+# mysql
+alias msql="sudo /etc/init.d/mysql"

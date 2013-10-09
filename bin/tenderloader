@@ -1,0 +1,28 @@
+#!/bin/bash
+
+samesystem=$HOME/Developer/samesystem
+
+db_count=$(mysql -e "show databases" | grep "samesystem_201" | wc -l)
+
+if [ "$db_count" -gt "3" ]; then
+  oldest_db=$(mysql -e "show databases" | grep -m 1 "samesystem_201")
+  echo $oldest_db
+
+  mysql -e "drop database $oldest_db"
+  echo "Ashes to ashes, $oldest_db to dust"
+else
+  echo "You only got $db_count useful databases. Won't drop the bass for ya."
+fi
+
+yaml_path=$samesystem/config/database.yml
+chmod +x $yaml_path
+
+echo "Using not tender loader to get the database and load it"
+new_db=$(load-backup | tail -1)
+
+ruby -e "require 'yaml';
+y = YAML.load_file('$yaml_path');
+y['development']['database'] = '$new_db';
+File.write('$yaml_path', y.to_yaml)"
+
+echo "Made love to $new_db in the $yaml_path"

@@ -17,7 +17,7 @@ fi
 # aliases
 alias z=zeus
 alias zst="z start"
-alias zs="z s passenger"
+alias zs="z s thin"
 alias zc="z c"
 alias cc="z cucumber --f pretty"
 alias hcc="HEADLESS=true z cucumber --f pretty"
@@ -30,7 +30,8 @@ alias colad="cola dag"
 alias r="rake"
 alias rg="rails generate"
 alias rmig="rake db:migrate"
-alias rs="rails s thin"
+alias roll="rake db:rollback"
+alias rs="rails s"
 # alias rs="passenger start"
 alias rc="rails c"
 alias bi="bundle install"
@@ -75,7 +76,7 @@ alias gro=gro_function
 alias grhard='g reset --hard HEAD'
 
 # git-smart gem
-alias gup='git smart-pull'
+alias gu='git smart-pull'
 alias gm='git smart-merge --no-ff'
 alias gmf='git smart-merge --ff-only'
 alias gl='git smart-log'
@@ -103,9 +104,13 @@ git-nuke_function() {
 alias dot='cd $HOME/dotfiles'
 alias dev='cd $HOME/Developer'
 alias s='cd $HOME/Developer/samesystem'
+alias pa='cd $HOME/Developer/pathoscope'
 alias tk='tmux kill-session'
 alias tm='tmux'
 alias tls='tmux ls'
+
+alias cdl='cap to_live deploy'
+alias cdm='cap to_test deploy'
 
 # dotfiles accessors
 alias vrc="vim ~/.vimrc"
