@@ -53,6 +53,7 @@ NeoBundle 'rizzatti/dash.vim'
 
 " Code quality
 NeoBundle 'fousa/vim-flog'
+NeoBundle 'cakebaker/scss-syntax.vim'
 
 NeoBundleCheck
 

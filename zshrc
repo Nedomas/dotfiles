@@ -24,6 +24,7 @@ alias hcc="HEADLESS=true z cucumber --f pretty"
 alias zweep="rm .zeus.sock"
 alias zsp="z rspec"
 alias cs3="rails s -e cucumber -p 3333"
+alias ccs3="CACHE_CLASSES=false cs3"
 alias c3="bundle exec cucumber --f pretty"
 alias hc3="HEADLESS=true bundle exec cucumber --f pretty"
 alias colad="cola dag"
@@ -44,6 +45,7 @@ alias v=vim
 alias doctor=doctor_function
 alias flap='flog $(find app -name \*.rb)'
 
+alias bower="noglob bower"
 alias ks="karma start"
 alias kss="ks --no-single-run"
 alias kr="karma run"
@@ -77,12 +79,15 @@ alias grc='git rebase --continue'
 alias git-nuke=git-nuke_function
 alias gro=gro_function
 alias grhard='g reset --hard HEAD'
+alias gpick='g cherry-pick'
+alias gard='g reset --hard'
+alias goft='g reset'
 
 # git-smart gem
 alias gu='git smart-pull'
-alias gm='git smart-merge --no-ff'
-alias gmf='git smart-merge --ff-only'
+alias gm='git smart-merge'
 alias gl='git smart-log'
+alias gcon='git diff --name-only --diff-filter=U'
 
 # ss backup
 alias lb='time load-backup -v'
