@@ -32,6 +32,8 @@ alias rg="rails generate"
 alias rmig="rake db:migrate"
 alias roll="rake db:rollback"
 alias rs="rails s"
+alias rt="rake routes"
+# alias rs="rails s thin"
 # alias rs="passenger start"
 alias rc="rails c"
 alias bi="bundle install"
@@ -40,6 +42,7 @@ alias bu="bundle update"
 alias c=cd
 alias v=vim
 alias doctor=doctor_function
+alias flap='flog $(find app -name \*.rb)'
 
 alias ks="karma start"
 alias kss="ks --no-single-run"
@@ -103,6 +106,7 @@ git-nuke_function() {
 
 alias dot='cd $HOME/dotfiles'
 alias dev='cd $HOME/Developer'
+alias pa='cd $HOME/Developer/pathoscope'
 alias s='cd $HOME/Developer/samesystem'
 alias pa='cd $HOME/Developer/pathoscope'
 alias tk='tmux kill-session'

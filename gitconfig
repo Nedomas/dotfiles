@@ -6,7 +6,7 @@
 [pager]
   diff =
 [color]
-	ui = always
+	ui = auto
 [alias]
   st = status -a
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative

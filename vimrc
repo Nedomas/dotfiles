@@ -30,12 +30,13 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mattn/emmet-vim'
 " NeoBundle 'xolox/vim-easytags'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'mhinz/vim-tmuxify'
 
-" ruby
+" syntax
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-cucumber'
 " NeoBundle 'vim-ruby/vim-ruby'
@@ -43,6 +44,15 @@ NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nono/vim-handlebars'
 NeoBundle 'slim-template/vim-slim'
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'othree/javascript-libraries-syntax.vim'
+
+" Dash
+NeoBundle 'rizzatti/funcoo.vim'
+NeoBundle 'rizzatti/dash.vim'
+
+" Code quality
+NeoBundle 'fousa/vim-flog'
 
 NeoBundleCheck
 
@@ -71,19 +81,17 @@ let g:agprg="ag -p ~/dotfiles/agignore --column"
 " Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
 
-" Tmuxify
-let g:tmuxify_run = {
-      \ 'cucumber': 'cc %',
-      \ 'ruby': 'zsp %',
-      \}
-let g:tmuxify_pane_size = '30'
-nnoremap <silent> <leader>cc :TxSetRunCmd 'cc %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
-nnoremap <silent> <leader>hcc :TxSetRunCmd 'HEADLESS=true cc %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
-nnoremap <silent> <leader>c3 :TxSetRunCmd 'c3 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
-nnoremap <silent> <leader>hc3 :TxSetRunCmd 'HEADLESS=true c3 %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
-nnoremap <silent> <leader>zsp :TxSetRunCmd 'zsp %' <bar> TxKill <bar> TxCreate <bar> TxRun<cr>
+" Flog
+:silent exe "g:flog_enable"
 
-" ================ various stuff ====================
+" Reek
+let g:reek_always_show = 0
+
+let g:dash_map = {
+  \ 'ruby'       : 'r',
+  \ 'sass'       : 'sass',
+  \ 'javascript' : 'j'
+\ }
 
 let mapleader=","
 
@@ -214,6 +222,7 @@ map <leader>f :Ag<space>
 map <leader>r :call RenameFile()<cr>
 nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>d :Dash<space>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
 map <leader>ev :vsp<space>
@@ -250,9 +259,6 @@ autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
 autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
 
 autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
-
-" Make it work someday
-" autocmd FileType ruby vmap <leader>b $A<cr>end<ESC>gv`<IPry.rescue do<cr><ESC>
 
 " remove all binding tags
 nmap <leader>rb :g/pry/d <bar> g/debugger/d<cr>
