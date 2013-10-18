@@ -1,0 +1,20 @@
+#!/bin/bash
+
+databases=$(mysql -e "show databases" | grep "samesystem_201")
+
+for database in $databases
+do
+  mysql -e "drop database $database"
+  echo "Droppped $database"
+done
+
+echo "Stopping mysql..."
+sudo /etc/init.d/mysql stop
+
+echo "Cleaning ibdata..."
+sudo rm /var/lib/mysql/ibdata1
+sudo rm /var/lib/mysql/ib_logfile0
+sudo rm /var/lib/mysql/ib_logfile1
+
+echo "Starting mysql..."
+sudo /etc/init.d/mysql start

@@ -26,6 +26,7 @@ link "tmux/tmux.conf" ".tmux.conf"
 link "gitconfig" ".gitconfig"
 link "gitignore_global" ".gitignore_global"
 link "bin" "bin"
+link "pryrc" ".pryrc"
 # link "bin/git_diff_wrapper" "bin/git_diff_wrapper"
 # link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
 

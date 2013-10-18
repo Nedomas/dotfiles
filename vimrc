@@ -29,8 +29,8 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mattn/emmet-vim'
-" NeoBundle 'xolox/vim-easytags'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'tsaleh/vim-matchit'
 
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
@@ -46,14 +46,17 @@ NeoBundle 'nono/vim-handlebars'
 NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'othree/javascript-libraries-syntax.vim'
+NeoBundle 'cakebaker/scss-syntax.vim'
 
 " Dash
 NeoBundle 'rizzatti/funcoo.vim'
 NeoBundle 'rizzatti/dash.vim'
 
+NeoBundle 'lordm/vim-browser-reload-linux'
+
 " Code quality
 NeoBundle 'fousa/vim-flog'
-NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'ecomba/vim-ruby-refactoring'
 
 NeoBundleCheck
 
@@ -253,16 +256,7 @@ nnoremap <leader>cpm :!cap to_test deploy<cr>
 
 nnoremap <leader>d :!zeal --query '
 nnoremap <leader>a :silent execute "!zeal --query '<cword>' &>/dev/null &" <bar> redraw!<CR>
-
-" insert binding tags
-autocmd FileType ruby nmap <leader>b obinding.pry<ESC>==
-
-autocmd FileType cucumber nmap <leader>b oWhen I use pry<ESC>==
-
-autocmd FileType javascript nmap <leader>b odebugger;<ESC>==
-
-" remove all binding tags
-nmap <leader>rb :g/pry/d <bar> g/debugger/d<cr>
+nnoremap <leader>w :ChromeReload<CR>
 
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
@@ -278,6 +272,27 @@ nnoremap <leader>H <Esc>:call HardMode()<CR>
 cmap w!! %!sudo tee > /dev/null
 nnoremap <leader>n :tab new<CR>
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
 " Refactoring
 nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
+
+" cabs - less stupidity                                                      {{{
+fu! Single_quote(str)
+  return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
+endfu
+fu! Cabbrev(key, value)
+  exe printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
+    \ a:key, 1+len(a:key), Single_quote(a:value), Single_quote(a:key))
+endfu
+"}}}
+
+call Cabbrev('rap', 'RAddParameter')
+call Cabbrev('rcpc', 'RConvertPostConditional')
+call Cabbrev('rel', 'RExtractLet')
+call Cabbrev('rec', 'RExtractConstant')
+call Cabbrev('relv', 'RExtractLocalVariable')
+call Cabbrev('rit', 'RInlineTemp')
+call Cabbrev('rrlv', 'RRenameLocalVariable')
+call Cabbrev('rriv', 'RRenameInstanceVariable')
+call Cabbrev('rem', 'RExtractMethod')

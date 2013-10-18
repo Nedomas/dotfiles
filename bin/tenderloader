@@ -4,7 +4,7 @@ samesystem=$HOME/Developer/samesystem
 
 db_count=$(mysql -e "show databases" | grep "samesystem_201" | wc -l)
 
-if [ "$db_count" -gt "3" ]; then
+if [ "$db_count" -gt "2" ]; then
   oldest_db=$(mysql -e "show databases" | grep -m 1 "samesystem_201")
   echo $oldest_db
 

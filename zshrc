@@ -31,6 +31,7 @@ alias colad="cola dag"
 alias r="rake"
 alias rg="rails generate"
 alias rmig="rake db:migrate"
+alias skeleton="rake test:migrations RAILS_ENV=testing_skeleton"
 alias roll="rake db:rollback"
 alias rs="rails s"
 alias rt="rake routes"
@@ -91,6 +92,9 @@ alias gcon='git diff --name-only --diff-filter=U'
 
 # ss backup
 alias lb='time load-backup -v'
+
+alias e='exit'
+alias flux='xflux -l 54.7 -g 25.3'
 
 gro_function() {
   git fetch
