@@ -47,14 +47,14 @@ NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
-
-" Dash
+"
+" " Dash
 NeoBundle 'rizzatti/funcoo.vim'
 NeoBundle 'rizzatti/dash.vim'
-
+"
 NeoBundle 'lordm/vim-browser-reload-linux'
-
-" Code quality
+"
+" " Code quality
 NeoBundle 'fousa/vim-flog'
 NeoBundle 'ecomba/vim-ruby-refactoring'
 
@@ -72,6 +72,12 @@ augroup myfiletypes
   autocmd!
 augroup END
 
+" ================ Speed ====================
+set ttyfast
+set ttyscroll=3
+set lazyredraw
+set synmaxcol=128
+set scrolljump=5
 " ================ Plugin settings ====================
 
 let NERDTreeShowHidden = 1
@@ -99,8 +105,8 @@ let g:dash_map = {
 
 let mapleader=","
 
-set bg=light
-" set bg=dark
+" set bg=light
+set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
@@ -139,7 +145,7 @@ set autoread " reload files changed outside vim
 set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
-set cursorline
+" set cursorline
 set cc=90
 
 set laststatus=2
@@ -207,20 +213,6 @@ source ~/.vim/scripts/vim.vim
 
 " ================ mappings ========================
 
-" ignore desperate arrow keys
-no <up> <nop>
-no <down> <nop>
-no <left> <nop>
-no <right> <nop>
-ino <up> <nop>
-ino <down> <nop>
-ino <left> <nop>
-ino <right> <nop>
-vno <up> <nop>
-vno <down> <nop>
-vno <left> <nop>
-vno <right> <nop>
-
 imap jj <esc>
 map <leader>f :Ag<space>
 map <leader>r :call RenameFile()<cr>
@@ -267,12 +259,8 @@ nnoremap K i<CR><Esc>
 " toggle hlsearch
 nmap <leader>hl :set hlsearch! hlsearch?<CR>
 
-nnoremap <leader>h <Esc>:call EasyMode()<CR>
-nnoremap <leader>H <Esc>:call HardMode()<CR>
 cmap w!! %!sudo tee > /dev/null
 nnoremap <leader>n :tab new<CR>
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
 " Refactoring
 nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
@@ -287,6 +275,8 @@ fu! Cabbrev(key, value)
 endfu
 "}}}
 
+call Cabbrev('W', 'w')
+call Cabbrev('Q', 'q')
 call Cabbrev('rap', 'RAddParameter')
 call Cabbrev('rcpc', 'RConvertPostConditional')
 call Cabbrev('rel', 'RExtractLet')
