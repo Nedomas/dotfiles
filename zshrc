@@ -25,6 +25,7 @@ alias zweep="rm .zeus.sock"
 alias zsp="z rspec"
 alias cs3="rails s -e cucumber -p 3333"
 alias ccs3="CACHE_CLASSES=false cs3"
+alias css3="CACHE_CLASSES=false cs3"
 alias c3="bundle exec cucumber --f pretty"
 alias hc3="HEADLESS=true bundle exec cucumber --f pretty"
 alias colad="cola dag"
@@ -94,6 +95,7 @@ alias gcon='git diff --name-only --diff-filter=U'
 alias lb='time load-backup -v'
 
 alias e='exit'
+alias q='exit'
 alias flux='xflux -l 54.7 -g 25.3'
 
 gro_function() {
@@ -119,7 +121,7 @@ alias pa='cd $HOME/Developer/pathoscope'
 alias s='cd $HOME/Developer/samesystem'
 alias pa='cd $HOME/Developer/pathoscope'
 alias tk='tmux kill-session'
-alias tm='tmux'
+alias t='tmux'
 alias tls='tmux ls'
 
 alias cdl='cap to_live deploy'

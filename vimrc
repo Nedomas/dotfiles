@@ -105,8 +105,8 @@ let g:dash_map = {
 
 let mapleader=","
 
-" set bg=light
-set bg=dark
+set bg=light
+" set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
@@ -277,6 +277,10 @@ endfu
 
 call Cabbrev('W', 'w')
 call Cabbrev('Q', 'q')
+call Cabbrev('Bd', 'bd')
+call Cabbrev('bD', 'bd')
+call Cabbrev('BD', 'bd')
+
 call Cabbrev('rap', 'RAddParameter')
 call Cabbrev('rcpc', 'RConvertPostConditional')
 call Cabbrev('rel', 'RExtractLet')
