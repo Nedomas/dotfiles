@@ -1,0 +1,18 @@
+#!/bin/bash
+
+from=$1
+to=$2
+
+echo "Replacing all '$from' to '$to'"
+
+files=$(ag -l "$from")
+
+echo ""
+echo "Found in files"
+for file in $files
+do
+  echo $file
+done
+
+ag -l "$from" | xargs perl -pi -E "s/$from/$to/g"
+echo "Done"

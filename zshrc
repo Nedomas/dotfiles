@@ -90,6 +90,7 @@ alias gu='git smart-pull'
 alias gm='git smart-merge'
 alias gl='git smart-log'
 alias gcon='git diff --name-only --diff-filter=U'
+alias glast='gcon | head -1'
 
 # ss backup
 alias lb='time load-backup -v'

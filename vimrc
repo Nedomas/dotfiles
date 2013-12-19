@@ -47,14 +47,14 @@ NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
-"
-" " Dash
-NeoBundle 'rizzatti/funcoo.vim'
-NeoBundle 'rizzatti/dash.vim'
-"
+
+" Dash
+" NeoBundle 'rizzatti/funcoo.vim'
+" NeoBundle 'rizzatti/dash.vim'
+
 NeoBundle 'lordm/vim-browser-reload-linux'
-"
-" " Code quality
+
+" Code quality
 NeoBundle 'fousa/vim-flog'
 NeoBundle 'ecomba/vim-ruby-refactoring'
 
