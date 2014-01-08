@@ -90,6 +90,8 @@ let g:agprg="ag -p ~/dotfiles/agignore --column"
 
 " Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
+let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_jshint_conf="/home/domas/Developer/samesystem/.jshintrc"
 
 " Flog
 :silent exe "g:flog_enable"
@@ -105,8 +107,8 @@ let g:dash_map = {
 
 let mapleader=","
 
-set bg=light
-" set bg=dark
+" set bg=light
+set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
@@ -222,6 +224,7 @@ nnoremap <leader>d :Dash<space>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
 map <leader>ev :vsp<space>
+nnoremap <leader>bd :bd<cr>
 
 nnoremap <leader>vrc :e $MYVIMRC<cr>
 nnoremap <leader>zrc :e ~/.zshrc<cr>

@@ -52,6 +52,7 @@ alias ks="karma start"
 alias kss="ks --no-single-run"
 alias kr="karma run"
 alias h='history'
+alias hgrep='h | grep'
 
 alias g=g_function
 alias d='gd'
@@ -84,6 +85,8 @@ alias grhard='g reset --hard HEAD'
 alias gpick='g cherry-pick'
 alias gard='g reset --hard'
 alias goft='g reset'
+
+alias gphm='gp heroku master'
 
 # git-smart gem
 alias gu='git smart-pull'
@@ -156,3 +159,6 @@ export EDITOR='vim'
 
 # source PATH & workspace-specific settings
 source $HOME/.custom
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
