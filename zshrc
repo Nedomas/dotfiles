@@ -47,6 +47,13 @@ alias v=vim
 alias doctor=doctor_function
 alias flap='flog $(find app -name \*.rb)'
 
+alias bsp='bin/rspec'
+alias brake='bin/rake'
+alias brmig='brake db:migrate'
+alias broutes='bin/rake routes'
+alias brs='bin/rails s'
+alias brc='bin/rails c'
+
 alias bower="noglob bower"
 alias ks="karma start"
 alias kss="ks --no-single-run"

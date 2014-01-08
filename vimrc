@@ -48,10 +48,6 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascr
 NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
 
-" Dash
-" NeoBundle 'rizzatti/funcoo.vim'
-" NeoBundle 'rizzatti/dash.vim'
-
 NeoBundle 'lordm/vim-browser-reload-linux'
 
 " Code quality
@@ -148,7 +144,7 @@ set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
 " set cursorline
-set cc=90
+set cc=80
 
 set laststatus=2
 set statusline=\ "
@@ -249,9 +245,7 @@ nnoremap <leader>gp :Git push origin HEAD<cr>
 nnoremap <leader>cpl :!cap to_live deploy<cr>
 nnoremap <leader>cpm :!cap to_test deploy<cr>
 
-nnoremap <leader>d :!zeal --query '
-nnoremap <leader>a :silent execute "!zeal --query '<cword>' &>/dev/null &" <bar> redraw!<CR>
-nnoremap <leader>w :ChromeReload<CR>
+nnoremap <leader>w :w<CR>
 
 " Swap two words
 nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
@@ -283,6 +277,8 @@ call Cabbrev('Q', 'q')
 call Cabbrev('Bd', 'bd')
 call Cabbrev('bD', 'bd')
 call Cabbrev('BD', 'bd')
+call Cabbrev('Qall', 'qall')
+call Cabbrev('QAll', 'qall')
 
 call Cabbrev('rap', 'RAddParameter')
 call Cabbrev('rcpc', 'RConvertPostConditional')
