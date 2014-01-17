@@ -1,0 +1,19 @@
+#!/bin/bash
+
+js_files=$(find . -name "*.js")
+tags="js.tags"
+
+echo 'Generating jstags...'
+echo '!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/' > $tags
+echo '!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/' >> $tags
+echo '!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/' >> $tags
+echo '!_TAG_PROGRAM_NAME	Exuberant Ctags	//' >> $tags
+echo '!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/' >> $tags
+echo '!_TAG_PROGRAM_VERSION	5.9~svn20110310	//' >> $tags
+
+for file in $js_files
+do
+  echo $(jsctags -f - $file) >> js.tags
+done
+
+echo 'Done'
