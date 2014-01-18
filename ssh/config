@@ -1,0 +1,4 @@
+Host pathoscope
+  HostName 198.211.126.66
+  User main
+  Port 24000
