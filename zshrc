@@ -138,6 +138,8 @@ alias tls='tmux ls'
 alias cdl='cap to_live deploy'
 alias cdm='cap to_test deploy'
 
+alias cpath='cap production deploy'
+
 # dotfiles accessors
 alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc && source ~/.zshrc"
