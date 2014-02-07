@@ -18,7 +18,7 @@ yaml_path=$samesystem/config/database.yml
 chmod +x $yaml_path
 
 echo "Using not tender loader to get the database and load it"
-new_db=$(load-backup | tail -1)
+new_db=$(bundle exec load-backup | tail -1)
 
 ruby -e "require 'yaml';
 y = YAML.load_file('$yaml_path');

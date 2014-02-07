@@ -31,11 +31,11 @@ alias hc3="HEADLESS=true bundle exec cucumber --f pretty"
 alias colad="cola dag"
 alias r="rake"
 alias rg="rails generate"
-alias rmig="rake db:migrate"
-alias skeleton="rake test:migrations RAILS_ENV=testing_skeleton"
-alias roll="rake db:rollback"
+alias rmig="bundle exec rake db:migrate"
+alias skeleton="bundle exec rake test:migrations RAILS_ENV=testing_skeleton"
+alias roll="bundle exec rake db:rollback"
 alias rs="rails s"
-alias rt="rake routes"
+alias rt="bundle exec rake routes"
 # alias rs="rails s thin"
 # alias rs="passenger start"
 alias rc="rails c"
@@ -47,6 +47,7 @@ alias v=vim
 alias doctor=doctor_function
 alias flap='flog $(find app -name \*.rb)'
 
+alias rsp='bundle exec rspec'
 alias bsp='bin/rspec'
 alias brake='bin/rake'
 alias brmig='brake db:migrate'
@@ -92,6 +93,7 @@ alias grhard='g reset --hard HEAD'
 alias gpick='g cherry-pick'
 alias gard='g reset --hard'
 alias goft='g reset'
+alias glog='glo'
 
 alias gphm='gp heroku master'
 
@@ -128,9 +130,8 @@ git-nuke_function() {
 
 alias dot='cd $HOME/dotfiles'
 alias dev='cd $HOME/Developer'
-alias pa='cd $HOME/Developer/pathoscope'
 alias s='cd $HOME/Developer/samesystem'
-alias pa='cd $HOME/Developer/pathoscope'
+alias p='cd $HOME/Developer/pathoscope'
 alias tk='tmux kill-session'
 alias t='tmux'
 alias tls='tmux ls'

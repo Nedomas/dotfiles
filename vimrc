@@ -262,6 +262,8 @@ nnoremap <leader>n :tab new<CR>
 " Refactoring
 nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
 
+nnoremap <bar><bar> :Tab /<bar><CR>
+
 " cabs - less stupidity                                                      {{{
 fu! Single_quote(str)
   return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
