@@ -54,6 +54,10 @@ NeoBundle 'lordm/vim-browser-reload-linux'
 NeoBundle 'fousa/vim-flog'
 NeoBundle 'ecomba/vim-ruby-refactoring'
 
+" CSS
+NeoBundle 'CSSMinister'
+NeoBundle 'hostsamurai/typeredeemer'
+
 NeoBundleCheck
 
 " ================ Ruby stuff ====================
@@ -291,3 +295,8 @@ call Cabbrev('rit', 'RInlineTemp')
 call Cabbrev('rrlv', 'RRenameLocalVariable')
 call Cabbrev('rriv', 'RRenameInstanceVariable')
 call Cabbrev('rem', 'RExtractMethod')
+call Cabbrev('hsla', 'ToHSLA')
+call Cabbrev('hlsa', 'ToHSLA')
+call Cabbrev('hex', 'ToHex')
+call Cabbrev('rgb', 'ToRGB')
+call Cabbrev('rgba', 'ToRGBA')
