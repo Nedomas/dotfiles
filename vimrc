@@ -31,6 +31,7 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tsaleh/vim-matchit'
+NeoBundle 'danro/rename.vim'
 
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
@@ -217,7 +218,7 @@ source ~/.vim/scripts/vim.vim
 
 imap jj <esc>
 map <leader>f :Ag<space>
-map <leader>r :call RenameFile()<cr>
+map <leader>r :rename<space>
 nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>d :Dash<space>

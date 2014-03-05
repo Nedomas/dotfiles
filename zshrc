@@ -111,6 +111,8 @@ alias e='exit'
 alias q='exit'
 alias flux='xflux -l 54.7 -g 25.3'
 
+alias replant='r db:drop; r db:create; r db:migrate; r db:seed'
+
 gro_function() {
   git fetch
   git rebase origin/$1
