@@ -26,8 +26,8 @@ alias zsp="z rspec"
 alias cs3="rails s -e cucumber -p 3333"
 alias ccs3="CACHE_CLASSES=false cs3"
 alias css3="CACHE_CLASSES=false cs3"
-alias c3="bundle exec cucumber --f pretty"
-alias hc3="HEADLESS=true bundle exec cucumber --f pretty"
+alias c3="CHROME=true bundle exec cucumber --f pretty"
+alias hc3="bundle exec cucumber --f pretty"
 alias colad="cola dag"
 alias r="rake"
 alias rg="rails generate"
@@ -75,6 +75,8 @@ alias gcaa='git commit -a --amend -C HEAD'
 alias gcl='git clone'
 alias gcm='git commit -m'
 alias gco='git checkout'
+alias gcom='gco master'
+alias gcol='gco live'
 alias gcob='gco -b'
 alias gcv='git commit --verbose'
 alias gd='git diff'
@@ -94,6 +96,7 @@ alias gpick='g cherry-pick'
 alias gard='g reset --hard'
 alias goft='g reset'
 alias glog='glo'
+alias gamend='gc --amend'
 
 alias gphm='gp heroku master'
 
@@ -138,8 +141,8 @@ alias tk='tmux kill-session'
 alias t='tmux'
 alias tls='tmux ls'
 
-alias cdl='cap to_live deploy'
-alias cdm='cap to_test deploy'
+alias cdl='be cap to_live deploy'
+alias cdm='be cap to_test deploy'
 
 alias cpath='cap production deploy'
 

@@ -50,6 +50,8 @@ NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
 
 NeoBundle 'lordm/vim-browser-reload-linux'
+NeoBundle 'xolox/vim-session'
+NeoBundle 'xolox/vim-misc'
 
 " Code quality
 NeoBundle 'fousa/vim-flog'
@@ -100,11 +102,10 @@ let g:syntastic_javascript_jshint_conf="/home/domas/Developer/samesystem/.jshint
 " Reek
 let g:reek_always_show = 0
 
-let g:dash_map = {
-  \ 'ruby'       : 'r',
-  \ 'sass'       : 'sass',
-  \ 'javascript' : 'j'
-\ }
+" Command-T settings
+let g:CommandTMaxHeight = 15
+let g:CommandTAlwaysShowDotFiles = 1
+let g:CommandTMatchWindowReverse = 1
 
 let mapleader=","
 
@@ -301,3 +302,7 @@ call Cabbrev('hlsa', 'ToHSLA')
 call Cabbrev('hex', 'ToHex')
 call Cabbrev('rgb', 'ToRGB')
 call Cabbrev('rgba', 'ToRGBA')
+
+call Cabbrev('ss', 'SaveSession')
+call Cabbrev('os', 'OpenSession')
+:let g:session_autoload = 'no'
