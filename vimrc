@@ -243,9 +243,9 @@ imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>{ {  }<ESC>hi
 
-nmap <leader>z :silent !z<cr>:redraw!<cr>
-nnoremap <leader>x :silent !x<cr>:redraw!<cr>
-nmap <leader>c :!c<cr>
+nmap <leader>z :silent !thyme -d<cr>:redraw!<cr>
+nnoremap <leader>x :silent !thyme -s<cr>:redraw!<cr>
+nmap <leader>c :!thyme -b<cr>
 
 command! -nargs=1 Silent
       \ | execute ':silent !'.<q-args>

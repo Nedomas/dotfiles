@@ -113,6 +113,7 @@ alias glast='gcon | head -1'
 alias z='thyme -d'
 alias x='thyme -s'
 alias c='thyme -b'
+alias lol='lolcommits'
 
 # ss backup
 alias lb='time load-backup -v'
