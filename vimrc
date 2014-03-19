@@ -43,6 +43,8 @@ NeoBundle 'tpope/vim-cucumber'
 " NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'heartsentwined/vim-ember-script'
+NeoBundle 'heartsentwined/vim-emblem'
 NeoBundle 'nono/vim-handlebars'
 NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
@@ -54,12 +56,16 @@ NeoBundle 'xolox/vim-session'
 NeoBundle 'xolox/vim-misc'
 
 " Code quality
-NeoBundle 'fousa/vim-flog'
+" NeoBundle 'fousa/vim-flog'
+NeoBundle 'sentientmonkey/vim-flog'
 NeoBundle 'ecomba/vim-ruby-refactoring'
 
 " CSS
 NeoBundle 'CSSMinister'
 NeoBundle 'hostsamurai/typeredeemer'
+
+NeoBundle 'twe4ked/vim-diff-toggle'
+NeoBundle 'pydave/AsyncCommand'
 
 NeoBundleCheck
 
@@ -109,7 +115,6 @@ let g:CommandTMatchWindowReverse = 1
 
 let mapleader=","
 
-set bg=light
 " set bg=dark
 colorscheme solarized
 set t_Co=256
@@ -222,7 +227,6 @@ map <leader>f :Ag<space>
 map <leader>r :rename<space>
 nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
-nnoremap <leader>d :Dash<space>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
 map <leader>ev :vsp<space>
@@ -238,6 +242,14 @@ imap <leader>" ""<ESC>i
 imap <leader>( ()<ESC>i
 imap <leader>[ []<ESC>i
 imap <leader>{ {  }<ESC>hi
+
+nmap <leader>z :silent !z<cr>:redraw!<cr>
+nnoremap <leader>x :silent !x<cr>:redraw!<cr>
+nmap <leader>c :!c<cr>
+
+command! -nargs=1 Silent
+      \ | execute ':silent !'.<q-args>
+      \ | execute ':redraw!'
 
 " git shortcuts
 nnoremap <leader>gs :Gstatus<cr>
@@ -266,11 +278,11 @@ cmap w!! %!sudo tee > /dev/null
 nnoremap <leader>n :tab new<CR>
 
 " Refactoring
-nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
+" nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
 
 nnoremap <bar><bar> :Tab /<bar><CR>
 
-" cabs - less stupidity                                                      {{{
+" cabs - less stupidity
 fu! Single_quote(str)
   return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
 endfu
@@ -280,6 +292,9 @@ fu! Cabbrev(key, value)
 endfu
 "}}}
 
+call Cabbrev('e', 'q')
+call Cabbrev('E', 'q')
+call Cabbrev('qe', 'q')
 call Cabbrev('W', 'w')
 call Cabbrev('Q', 'q')
 call Cabbrev('Bd', 'bd')
@@ -305,4 +320,5 @@ call Cabbrev('rgba', 'ToRGBA')
 
 call Cabbrev('ss', 'SaveSession')
 call Cabbrev('os', 'OpenSession')
+
 :let g:session_autoload = 'no'

@@ -1,0 +1,5 @@
+set :tmux, true
+option :b, :break, 'start a break' do
+  set :timer, 5*60
+  run
+end

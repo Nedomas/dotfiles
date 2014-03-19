@@ -23,6 +23,7 @@ alias cc="z cucumber --f pretty"
 alias hcc="HEADLESS=true z cucumber --f pretty"
 alias zweep="rm .zeus.sock"
 alias zsp="z rspec"
+alias rails="bin/rails"
 alias cs3="rails s -e cucumber -p 3333"
 alias ccs3="CACHE_CLASSES=false cs3"
 alias css3="CACHE_CLASSES=false cs3"
@@ -43,9 +44,11 @@ alias bi="bundle install"
 alias be="bundle exec"
 alias bu="bundle update"
 alias c=cd
+alias vim="vim --servername yourmother"
 alias v=vim
 alias doctor=doctor_function
 alias flap='flog $(find app -name \*.rb)'
+alias q=e
 
 alias rsp='bundle exec rspec'
 alias bsp='bin/rspec'
@@ -61,6 +64,7 @@ alias kss="ks --no-single-run"
 alias kr="karma run"
 alias h='history'
 alias hgrep='h | grep'
+alias hg='hgrep'
 
 alias g=g_function
 alias d='gd'
@@ -79,7 +83,7 @@ alias gcom='gco master'
 alias gcol='gco live'
 alias gcob='gco -b'
 alias gcv='git commit --verbose'
-alias gd='git diff'
+alias gd='gdl'
 alias gdc='git diff --cached'
 alias gdl='git diff --color=always | less -r'
 alias gf='g fetch'
@@ -106,6 +110,9 @@ alias gm='git smart-merge'
 alias gl='git smart-log'
 alias gcon='git diff --name-only --diff-filter=U'
 alias glast='gcon | head -1'
+alias z='thyme -d'
+alias x='thyme -s'
+alias c='thyme -b'
 
 # ss backup
 alias lb='time load-backup -v'
