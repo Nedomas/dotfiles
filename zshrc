@@ -119,6 +119,7 @@ alias lol='lolcommits'
 alias lb='time load-backup -v'
 
 alias e='exit'
+alias ex='exit'
 alias q='exit'
 alias flux='xflux -l 54.7 -g 25.3'
 
@@ -191,3 +192,21 @@ source $HOME/.custom
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+
+# ### For teamviewer
+# export PATH="/home/domas/teamviewer:$PATH"
+
+# preexec () { echo "-"; }
+# preexec_invoke_exec () {
+#   # eval $@
+#   [ -n "$COMP_LINE" ] && return  # do nothing if completing
+#   [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+#   previous_command=$this_command;
+#   this_command=$BASH_COMMAND
+#   # local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+#   # preexec "$this_command"
+#   echo $this_command >> ~/.coder
+#   # preexec
+# }
+# trap 'preexec_invoke_exec' DEBUG

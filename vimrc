@@ -291,8 +291,7 @@ fu! Cabbrev(key, value)
 endfu
 "}}}
 
-call Cabbrev('e', 'q')
-call Cabbrev('E', 'q')
+call Cabbrev('E', 'e')
 call Cabbrev('qe', 'q')
 call Cabbrev('W', 'w')
 call Cabbrev('Q', 'q')
