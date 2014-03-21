@@ -44,7 +44,7 @@ alias bi="bundle install"
 alias be="bundle exec"
 alias bu="bundle update"
 alias c=cd
-alias vim="vim --servername yourmother"
+alias vim="vim"
 alias v=vim
 alias doctor=doctor_function
 alias flap='flog $(find app -name \*.rb)'
@@ -167,6 +167,12 @@ alias gtags=gtags_function
 gtags_function() {
   ctags -R -f app.tags .
   ctags -R -f gem.tags `bundle show --paths`
+}
+
+function prompt_ssh {
+    if [ -n "$SSH_CLIENT" ]; then
+        echo -n 'ssh'
+    fi
 }
 
 # random prompt settings

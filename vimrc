@@ -65,7 +65,6 @@ NeoBundle 'CSSMinister'
 NeoBundle 'hostsamurai/typeredeemer'
 
 NeoBundle 'twe4ked/vim-diff-toggle'
-NeoBundle 'pydave/AsyncCommand'
 
 NeoBundleCheck
 
@@ -115,7 +114,7 @@ let g:CommandTMatchWindowReverse = 1
 
 let mapleader=","
 
-" set bg=dark
+set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
