@@ -15,14 +15,14 @@ elif [[ "$os" == "Linux" ]]; then
 fi
 
 # aliases
-alias z=zeus
+alias z="be zeus"
 alias zst="z start"
 alias zs="z s thin"
 alias zc="z c"
 alias cc="z cucumber --f pretty"
 alias hcc="HEADLESS=true z cucumber --f pretty"
 alias zweep="rm .zeus.sock"
-alias zsp="z rspec"
+alias zsp="be zeus rspec"
 alias rails="bin/rails"
 alias cs3="rails s -e cucumber -p 3333"
 alias ccs3="CACHE_CLASSES=false cs3"
@@ -78,6 +78,10 @@ alias gca='git commit -a'
 alias gcaa='git commit -a --amend -C HEAD'
 alias gcl='git clone'
 alias gcm='git commit -m'
+
+# Learn Spanish with commit messages
+git(){[[ "$@" = commit\ -m* ]]&&termit en es ${@:$#};command git $@}
+
 alias gco='git checkout'
 alias gcom='gco master'
 alias gcol='gco live'
@@ -149,6 +153,8 @@ alias p='cd $HOME/Developer/pathoscope'
 alias tk='tmux kill-session'
 alias t='tmux'
 alias tls='tmux ls'
+alias ta='t attach'
+alias td='t detach'
 
 alias cdl='be cap to_live deploy'
 alias cdm='be cap to_test deploy'
