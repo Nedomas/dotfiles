@@ -16,27 +16,32 @@ fi
 
 # aliases
 alias z="be zeus"
-alias zst="z start"
-alias zs="z s thin"
-alias zc="z c"
-alias cc="z cucumber --f pretty"
-alias hcc="HEADLESS=true z cucumber --f pretty"
+alias zst="CHROME=true CACHE_CLASSES=false be zeus start"
+alias zsth="CACHE_CLASSES=false be zeus start"
+alias zs="be zeus s thin"
+alias zc="be zeus c"
+alias cc="CACHE_CLASSES=false be zeus cucumber --f pretty"
+alias hcc="be zeus cucumber --f pretty"
 alias zweep="rm .zeus.sock"
-alias zsp="be zeus rspec"
-alias rails="bin/rails"
-alias cs3="rails s -e cucumber -p 3333"
+alias zsp="be zeus rspec --format documentation --color"
+# alias rails="bin/rails"
+alias krs="cat tmp/pids/server.pid | kill -9 "
+alias cs3="be rails s -e cucumber -p 3333"
 alias ccs3="CACHE_CLASSES=false cs3"
 alias css3="CACHE_CLASSES=false cs3"
 alias c3="CHROME=true bundle exec cucumber --f pretty"
 alias hc3="bundle exec cucumber --f pretty"
 alias colad="cola dag"
-alias r="rake"
+alias r="be rake"
 alias rg="rails generate"
 alias rmig="bundle exec rake db:migrate"
+alias zrmig="zeus rake db:migrate"
 alias skeleton="bundle exec rake test:migrations RAILS_ENV=testing_skeleton"
 alias roll="bundle exec rake db:rollback"
+alias zroll="zeus rake db:rollback"
 alias rs="rails s"
 alias rt="bundle exec rake routes"
+alias todo="bash ~/dotfiles/bin/todo_app/todo.sh"
 # alias rs="rails s thin"
 # alias rs="passenger start"
 alias rc="rails c"
@@ -70,7 +75,7 @@ alias g=g_function
 alias d='gd'
 alias gad='git add .'
 alias gau='git add . --update'
-alias gap='git add --patch'
+alias gap='stty sane && git add --patch'
 alias gaa='git add -A'
 alias gbr='git branch'
 alias gc='git commit'
@@ -80,7 +85,7 @@ alias gcl='git clone'
 alias gcm='git commit -m'
 
 # Learn Spanish with commit messages
-git(){[[ "$@" = commit\ -m* ]]&&termit en es ${@:$#};command git $@}
+# git(){[[ "$@" = commit\ -m* ]]&&termit en es ${${@:$#}//./} -t;command git $@}
 
 alias gco='git checkout'
 alias gcom='gco master'
@@ -99,12 +104,15 @@ alias gpr='git pull --rebase'
 alias grc='git rebase --continue'
 alias git-nuke=git-nuke_function
 alias gro=gro_function
+alias gr='g reset'
 alias grhard='g reset --hard HEAD'
 alias gpick='g cherry-pick'
 alias gard='g reset --hard'
 alias goft='g reset'
 alias glog='glo'
 alias gamend='gc --amend'
+alias gs='g stash'
+alias gsp='gs pop'
 
 alias gphm='gp heroku master'
 
@@ -126,6 +134,7 @@ alias e='exit'
 alias ex='exit'
 alias q='exit'
 alias flux='xflux -l 54.7 -g 25.3'
+alias tdt='ssh -L 0.0.0.0:9225:localhost:9222 localhost -N'
 
 alias replant='r db:drop; r db:create; r db:migrate; r db:seed'
 
@@ -150,6 +159,7 @@ alias dot='cd $HOME/dotfiles'
 alias dev='cd $HOME/Developer'
 alias s='cd $HOME/Developer/samesystem'
 alias p='cd $HOME/Developer/pathoscope'
+alias mo='cd $HOME/Developer/movies'
 alias tk='tmux kill-session'
 alias t='tmux'
 alias tls='tmux ls'
@@ -157,9 +167,12 @@ alias ta='t attach'
 alias td='t detach'
 
 alias cdl='be cap to_live deploy'
-alias cdm='be cap to_test deploy'
+alias cdm1='be cap to_test1 deploy'
+alias cdt1='cdm1'
+alias cdt2='be cap to_test2 deploy'
 
 alias cpath='cap production deploy'
+alias takeover="tmux detach -a"
 
 # dotfiles accessors
 alias vrc="vim ~/.vimrc"
@@ -199,20 +212,5 @@ source $HOME/.custom
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-
 # ### For teamviewer
 # export PATH="/home/domas/teamviewer:$PATH"
-
-# preexec () { echo "-"; }
-# preexec_invoke_exec () {
-#   # eval $@
-#   [ -n "$COMP_LINE" ] && return  # do nothing if completing
-#   [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
-#   previous_command=$this_command;
-#   this_command=$BASH_COMMAND
-#   # local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
-#   # preexec "$this_command"
-#   echo $this_command >> ~/.coder
-#   # preexec
-# }
-# trap 'preexec_invoke_exec' DEBUG

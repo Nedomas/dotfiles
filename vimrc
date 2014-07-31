@@ -32,6 +32,10 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tsaleh/vim-matchit'
 NeoBundle 'danro/rename.vim'
+NeoBundle 'tommcdo/vim-exchange'
+NeoBundle 'dhruvasagar/vim-vinegar'
+" NeoBundle 'xolox/vim-easytags'
+NeoBundle 'tpope/vim-eunuch'
 
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
@@ -48,8 +52,18 @@ NeoBundle 'heartsentwined/vim-emblem'
 NeoBundle 'nono/vim-handlebars'
 NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+" NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
+
+" NeoBundle 'Raimondi/delimitMate'
+" NeoBundle 'Valloric/YouCompleteMe'
+" NeoBundle 'marijnh/tern_for_vim'
+
+NeoBundle "MarcWeber/vim-addon-mw-utils"
+NeoBundle "tomtom/tlib_vim"
+" NeoBundle "garbas/vim-snipmate"
+" NeoBundle "honza/vim-snippets"
 
 NeoBundle 'lordm/vim-browser-reload-linux'
 NeoBundle 'xolox/vim-session'
@@ -65,6 +79,12 @@ NeoBundle 'CSSMinister'
 NeoBundle 'hostsamurai/typeredeemer'
 
 NeoBundle 'twe4ked/vim-diff-toggle'
+
+NeoBundle 'justinmk/vim-sneak'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'thoughtbot/vim-rspec'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'Keithbsmiley/rspec.vim'
 
 NeoBundleCheck
 
@@ -98,8 +118,11 @@ let g:agprg="ag -p ~/dotfiles/agignore --column"
 
 " Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['jshint', 'eslint']
 let g:syntastic_javascript_jshint_conf="/home/domas/Developer/samesystem/.jshintrc"
+let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'rubylint']
+let g:syntastic_coffee_checkers = ['coffee', 'coffeelint']
+let g:syntastic_scss_checkers = ['scss_lint']
 
 " Flog
 :silent exe "g:flog_enable"
@@ -112,9 +135,11 @@ let g:CommandTMaxHeight = 15
 let g:CommandTAlwaysShowDotFiles = 1
 let g:CommandTMatchWindowReverse = 1
 
+let g:session_autosave = 'no'
+
 let mapleader=","
 
-set bg=dark
+" set bg=dark
 colorscheme solarized
 set t_Co=256
 if $colorterm == 'gnome-terminal'
@@ -185,6 +210,11 @@ set undofile
 set autoindent
 set smartindent
 set smarttab
+" Python
+" set shiftwidth=4
+" set softtabstop=4
+" set tabstop=4
+" Ruby
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -223,12 +253,11 @@ source ~/.vim/scripts/vim.vim
 
 imap jj <esc>
 map <leader>f :Ag<space>
-map <leader>r :rename<space>
-nnoremap <leader>t :CommandT<cr>
+nnoremap <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
 map <leader>ew :e<space>
 map <leader>es :sp<space>
-map <leader>ev :vsp<space>
+map <leader>ev :vsp<cr>
 nnoremap <leader>bd :bd<cr>
 
 nnoremap <leader>vrc :e $MYVIMRC<cr>
@@ -275,6 +304,7 @@ nmap <leader>hl :set hlsearch! hlsearch?<CR>
 
 cmap w!! %!sudo tee > /dev/null
 nnoremap <leader>n :tab new<CR>
+nnoremap <leader>d Odebugger;<esc>:w<CR>
 
 " Refactoring
 " nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
@@ -290,6 +320,20 @@ fu! Cabbrev(key, value)
     \ a:key, 1+len(a:key), Single_quote(a:value), Single_quote(a:key))
 endfu
 "}}}
+
+" remove empty lines
+function TrimEndLines()
+    let save_cursor = getpos(".")
+    :silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_cursor)
+endfunction
+
+au BufWritePre * call TrimEndLines()
+
+let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec} --format documentation --color"
+map <Leader>w :call RunCurrentSpecFile()<CR>
+map <Leader>e :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
 
 call Cabbrev('E', 'e')
 call Cabbrev('qe', 'q')
@@ -315,6 +359,7 @@ call Cabbrev('hlsa', 'ToHSLA')
 call Cabbrev('hex', 'ToHex')
 call Cabbrev('rgb', 'ToRGB')
 call Cabbrev('rgba', 'ToRGBA')
+call Cabbrev(']', 'TernDef')
 
 call Cabbrev('ss', 'SaveSession')
 call Cabbrev('os', 'OpenSession')
