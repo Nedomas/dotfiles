@@ -134,6 +134,7 @@ let g:reek_always_show = 0
 let g:CommandTMaxHeight = 15
 let g:CommandTAlwaysShowDotFiles = 1
 let g:CommandTMatchWindowReverse = 1
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/platforms/*"
 
 let g:session_autosave = 'no'
 

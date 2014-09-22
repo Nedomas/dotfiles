@@ -15,16 +15,14 @@ elif [[ "$os" == "Linux" ]]; then
 fi
 
 # aliases
-alias z="be zeus"
-alias zst="CHROME=true CACHE_CLASSES=false be zeus start"
-alias zsth="CACHE_CLASSES=false be zeus start"
-alias zs="be zeus s thin"
-alias zc="be zeus c"
-alias cc="CACHE_CLASSES=false be zeus cucumber --f pretty"
-alias hcc="be zeus cucumber --f pretty"
+alias z="EAGER_LOAD=true CHROME=true CACHE_CLASSES=false be zeus"
+alias zst="z start"
+alias zs="z s thin"
+alias zc="z c"
+alias cc="z cucumber --f pretty"
+alias hcc="z cucumber --f pretty"
 alias zweep="rm .zeus.sock"
-alias zsp="be zeus rspec --format documentation --color"
-# alias rails="bin/rails"
+alias zsp="z rspec --format documentation --color"
 alias krs="cat tmp/pids/server.pid | kill -9 "
 alias cs3="be rails s -e cucumber -p 3333"
 alias ccs3="CACHE_CLASSES=false cs3"
@@ -42,8 +40,6 @@ alias zroll="zeus rake db:rollback"
 alias rs="rails s"
 alias rt="bundle exec rake routes"
 alias todo="bash ~/dotfiles/bin/todo_app/todo.sh"
-# alias rs="rails s thin"
-# alias rs="passenger start"
 alias rc="rails c"
 alias bi="bundle install"
 alias be="bundle exec"
@@ -112,7 +108,9 @@ alias goft='g reset'
 alias glog='glo'
 alias gamend='gc --amend'
 alias gs='g stash'
+alias gss='g stash save'
 alias gsp='gs pop'
+alias gsl='gs list'
 
 alias gphm='gp heroku master'
 
@@ -122,9 +120,6 @@ alias gm='git smart-merge'
 alias gl='git smart-log'
 alias gcon='git diff --name-only --diff-filter=U'
 alias glast='gcon | head -1'
-alias z='thyme -d'
-alias x='thyme -s'
-alias c='thyme -b'
 alias lol='lolcommits'
 
 # ss backup
@@ -214,3 +209,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # ### For teamviewer
 # export PATH="/home/domas/teamviewer:$PATH"
+
+export PATH=${PATH}:~/android-sdk-linux/tools
+
+export NVM_DIR="/home/domas/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
