@@ -50,6 +50,7 @@ alias v=vim
 alias doctor=doctor_function
 alias flap='flog $(find app -name \*.rb)'
 alias q=e
+alias h=heroku
 
 alias rsp='bundle exec rspec'
 alias bsp='bin/rspec'
@@ -178,6 +179,9 @@ alias tmx="vim ~/.tmux.conf"
 # generate ctags
 alias gtags=gtags_function
 
+# groc
+alias groc_gen='node_modules/groc/bin/groc src/*.coffee'
+
 # idea: automate with bundle install
 gtags_function() {
   ctags -R -f app.tags .
@@ -186,7 +190,7 @@ gtags_function() {
 
 function prompt_ssh {
     if [ -n "$SSH_CLIENT" ]; then
-        echo -n 'ssh'
+        # echo -n 'ssh'
     fi
 }
 
@@ -214,3 +218,5 @@ export PATH=${PATH}:~/android-sdk-linux/tools
 
 export NVM_DIR="/home/domas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export JAVA_HOME='/usr/lib/jvm/java-7-openjdk-amd64'

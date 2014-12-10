@@ -20,3 +20,5 @@
   unstage = reset HEAD
   staged = diff --cached
   unstaged = diff
+[push]
+	default = simple

@@ -86,6 +86,8 @@ NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'Keithbsmiley/rspec.vim'
 
+NeoBundle 'digitaltoad/vim-jade'
+
 NeoBundleCheck
 
 " ================ Ruby stuff ====================

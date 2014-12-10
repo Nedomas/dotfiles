@@ -4,4 +4,3 @@ vendor/bundle
 *.tags
 .DS_Store
 mayhem.zsh-theme
-bin
