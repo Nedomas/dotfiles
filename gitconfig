@@ -22,3 +22,9 @@
   unstaged = diff
 [push]
 	default = simple
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 700x550+957+165
+	main-window-view = HistoryView
+	history-view-vpane-position = 361
+	file-view-vpane-position = 975

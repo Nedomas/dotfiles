@@ -52,6 +52,7 @@ NeoBundle 'heartsentwined/vim-emblem'
 NeoBundle 'nono/vim-handlebars'
 NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'mxw/vim-jsx'
 " NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
@@ -313,6 +314,7 @@ nnoremap <leader>d Odebugger;<esc>:w<CR>
 " nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
 
 nnoremap <bar><bar> :Tab /<bar><CR>
+nnoremap r PjddkY
 
 " cabs - less stupidity
 fu! Single_quote(str)
@@ -368,3 +370,29 @@ call Cabbrev('ss', 'SaveSession')
 call Cabbrev('os', 'OpenSession')
 
 :let g:session_autoload = 'no'
+
+" Automatically set paste mode in Vim when pasting in insert mode
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+" Copy paste
+" set mouse=a
+set ttymouse=xterm2

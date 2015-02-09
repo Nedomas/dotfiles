@@ -33,6 +33,9 @@ alias colad="cola dag"
 alias r="be rake"
 alias rg="rails generate"
 alias rmig="bundle exec rake db:migrate"
+alias rdrop="bundle exec rake db:drop"
+alias rcreate="bundle exec rake db:create"
+alias rreset="rdrop; rcreate; rmig"
 alias zrmig="zeus rake db:migrate"
 alias skeleton="bundle exec rake test:migrations RAILS_ENV=testing_skeleton"
 alias roll="bundle exec rake db:rollback"
@@ -52,8 +55,7 @@ alias flap='flog $(find app -name \*.rb)'
 alias q=e
 alias h=heroku
 
-alias rsp='bundle exec rspec'
-alias bsp='bin/rspec'
+alias rsp='bin/rspec'
 alias brake='bin/rake'
 alias brmig='brake db:migrate'
 alias broutes='bin/rake routes'
