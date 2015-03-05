@@ -7,7 +7,7 @@ set nocompatible
 filetype off
 if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle/'))
+  call neobundle#begin(expand('~/.vim/bundle/'))
 endif
 
 " Let NeoBundle manage NeoBundle
@@ -30,7 +30,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'tsaleh/vim-matchit'
+" NeoBundle 'tsaleh/vim-matchit'
 NeoBundle 'danro/rename.vim'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'dhruvasagar/vim-vinegar'
@@ -72,7 +72,7 @@ NeoBundle 'xolox/vim-misc'
 
 " Code quality
 " NeoBundle 'fousa/vim-flog'
-NeoBundle 'sentientmonkey/vim-flog'
+" NeoBundle 'sentientmonkey/vim-flog'
 NeoBundle 'ecomba/vim-ruby-refactoring'
 
 " CSS
@@ -90,6 +90,7 @@ NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'digitaltoad/vim-jade'
 
 NeoBundleCheck
+call neobundle#end()
 
 " ================ Ruby stuff ====================
 
@@ -128,7 +129,7 @@ let g:syntastic_coffee_checkers = ['coffee', 'coffeelint']
 let g:syntastic_scss_checkers = ['scss_lint']
 
 " Flog
-:silent exe "g:flog_enable"
+" :silent exe "g:flog_enable"
 
 " Reek
 let g:reek_always_show = 0

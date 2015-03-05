@@ -1,6 +1,0 @@
-# account-specific sources
-source ~/private/mutt/icloud.muttrc
-source ~/private/mutt/gmail.muttrc
-
-folder-hook iCloud/*        source ~/private/mutt/icloud.muttrc
-folder-hook Gmail/*         source ~/private/mutt/gmail.muttrc

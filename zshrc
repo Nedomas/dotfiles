@@ -197,8 +197,8 @@ function prompt_ssh {
 }
 
 # random prompt settings
-export HISTFILESIZE=1000
-export HISTSIZE=1000
+export HISTFILESIZE=10000
+export HISTSIZE=10000
 export PROMPT_COMMAND='history -a'
 COMPLETION_WAITING_DOTS="true"
 # I dont make mistakes
@@ -207,18 +207,20 @@ unsetopt correct_all
 export LC_ALL="en_US.UTF-8"
 export EDITOR='vim'
 
+export PATH="$HOME/dotfiles/bin:$PATH"
+
 # source PATH & workspace-specific settings
-source $HOME/.custom
+# source $HOME/.custom
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# export PATH="/usr/local/heroku/bin:$PATH"
 
 # ### For teamviewer
 # export PATH="/home/domas/teamviewer:$PATH"
 
-export PATH=${PATH}:~/android-sdk-linux/tools
+# export PATH=${PATH}:~/android-sdk-linux/tools
 
-export NVM_DIR="/home/domas/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="/home/domas/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export JAVA_HOME='/usr/lib/jvm/java-7-openjdk-amd64'
+# export JAVA_HOME='/usr/lib/jvm/java-7-openjdk-amd64'
