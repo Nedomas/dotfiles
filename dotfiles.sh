@@ -10,10 +10,12 @@ link() {
 }
 
 echo 'symlinking dotfiles'
-link "zshrc" ".zshrc"
-link "vimrc" ".vimrc"
-link "vim" ".vim"
-link "tmux/tmux.conf" ".tmux.conf"
-link "gitconfig" ".gitconfig"
-link "gitignore_global" ".gitignore_global"
-link "pryrc" ".pryrc"
+link "gemrc" ".gemrc"
+# link "curlrc" ".curlrc"
+# link "zsh/themes/mayhem.zsh-theme" ".oh-my-zsh/themes/mayhem.zsh-theme"
+# link "zshrc" ".zshrc"
+# link "vimrc" ".vimrc"
+# link "vim" ".vim"
+# link "tmux/tmux.conf" ".tmux.conf"
+# link "gitconfig" ".gitconfig"
+# link "gitignore_global" ".gitignore_global"

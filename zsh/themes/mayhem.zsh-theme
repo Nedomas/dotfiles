@@ -27,6 +27,6 @@ MODE_INDICATOR="%{$YELLOW%}-- COMMAND --%{$RESET_COLOR%}"
 
 # Prompt format
 PROMPT='
-%n@%m%{$RESET_COLOR%} %{$YELLOW%}$(prompt_ssh)%{$RESET_COLOR%}
+%n@%m%{$RESET_COLOR%} %{$YELLOW%}%{$RESET_COLOR%}
 %{$BLUE%}$(parse_git_dirty)$(git_prompt_ahead)>%{$RESET_COLOR%} '
 RPROMPT='%~%u %{$CYAN%}$(current_branch)$(git_prompt_short_sha)%{$RESET_COLOR%}$(git_cwd_info)'

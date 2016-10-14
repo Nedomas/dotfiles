@@ -11,8 +11,10 @@
   st = status -a
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative
   ch = checkout -
+[mergetool "p4merge"]
+  path = /usr/local/bin/p4merge
 [merge]
-	tool = vimdiff
+	tool = p4merge
 [core]
 	excludesfile = ~/.gitignore_global
 [alias]

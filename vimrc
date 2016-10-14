@@ -40,6 +40,7 @@ NeoBundle 'tpope/vim-eunuch'
 " tmux
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'mhinz/vim-tmuxify'
+NeoBundle 'jgdavey/tslime.vim'
 
 " syntax
 NeoBundle 'tpope/vim-rails'
@@ -47,6 +48,8 @@ NeoBundle 'tpope/vim-cucumber'
 " NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'mtscout6/vim-cjsx'
+NeoBundle 'mxw/vim-jsx'
 NeoBundle 'heartsentwined/vim-ember-script'
 NeoBundle 'heartsentwined/vim-emblem'
 NeoBundle 'nono/vim-handlebars'
@@ -122,11 +125,13 @@ let g:agprg="ag -p ~/dotfiles/agignore --column"
 
 " Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
-let g:syntastic_javascript_checkers=['jshint', 'eslint']
-let g:syntastic_javascript_jshint_conf="/home/domas/Developer/samesystem/.jshintrc"
-let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'rubylint']
+let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_jshint_args = '--config /Users/domas/Developer/UniversalAvenue/.jshintrc'
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_ruby_rubocop_args = '--config /Users/domas/Developer/UniversalAvenue/.rubocop.yml'
 let g:syntastic_coffee_checkers = ['coffee', 'coffeelint']
-let g:syntastic_scss_checkers = ['scss_lint']
+" let g:syntastic_scss_checkers = ['scss_lint']
+" let g:syntastic_scss_scss_lint_args = '--config /Users/domas/Developer/UniversalAvenue/.scss-lint.yml'
 
 " Flog
 " :silent exe "g:flog_enable"
@@ -147,10 +152,11 @@ let mapleader=","
 " set bg=dark
 colorscheme solarized
 set t_Co=256
-if $colorterm == 'gnome-terminal'
-  set term=screen-256color
-  let g:solarized_termcolors=256
-endif
+" if $colorterm == 'gnome-terminal'
+set term=xterm-256color
+" set term=screen-256color
+" let g:solarized_termcolors=256
+" endif
 
 " ignore tags for command-t
 set wildignore+=.git,**/vendor,**/dhtml_calendar,**/ckeditor,**/bundle,log,tmp,*.tags
@@ -184,7 +190,7 @@ set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
 " set cursorline
-set cc=80
+set cc=100
 
 set laststatus=2
 set statusline=\ "
@@ -334,9 +340,12 @@ function TrimEndLines()
     call setpos('.', save_cursor)
 endfunction
 
+nnoremap <C-H> <C-W><C-H>
+
 au BufWritePre * call TrimEndLines()
 
-let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec} --format documentation --color"
+" let g:rspec_command = "compiler rspec | Make rspec {spec} --format documentation --color"
+let g:rspec_command = 'call Send_to_Tmux("rsp {spec}\n")'
 map <Leader>w :call RunCurrentSpecFile()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
@@ -397,3 +406,9 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " Copy paste
 " set mouse=a
 set ttymouse=xterm2
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+imap jj <Esc>
+
+" arrows in INSERT mode
+set nocompatible

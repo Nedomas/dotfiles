@@ -16,6 +16,9 @@ fi
 
 # aliases
 alias z="EAGER_LOAD=true CHROME=true CACHE_CLASSES=false be zeus"
+alias fs="foreman start"
+alias ch="cd ~/Developer/closeheat/closeheat"
+alias ua="cd ~/Developer/UniversalAvenue/UniversalAvenue"
 alias zst="z start"
 alias zs="z s thin"
 alias zc="z c"
@@ -29,6 +32,7 @@ alias ccs3="CACHE_CLASSES=false cs3"
 alias css3="CACHE_CLASSES=false cs3"
 alias c3="CHROME=true bundle exec cucumber --f pretty"
 alias hc3="bundle exec cucumber --f pretty"
+alias ccc="CHROME=true be cucumber features --tags @XYZ"
 alias colad="cola dag"
 alias r="be rake"
 alias rg="rails generate"
@@ -43,7 +47,7 @@ alias zroll="zeus rake db:rollback"
 alias rs="rails s"
 alias rt="bundle exec rake routes"
 alias todo="bash ~/dotfiles/bin/todo_app/todo.sh"
-alias rc="rails c"
+alias rc="be rails c"
 alias bi="bundle install"
 alias be="bundle exec"
 alias bu="bundle update"
@@ -179,6 +183,7 @@ alias crc="vim ~/.custom && source ~/.custom"
 alias tmx="vim ~/.tmux.conf"
 
 # generate ctags
+alias ctags="`brew --prefix`/bin/ctags"
 alias gtags=gtags_function
 
 # groc
@@ -224,3 +229,8 @@ export PATH="$HOME/dotfiles/bin:$PATH"
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # export JAVA_HOME='/usr/lib/jvm/java-7-openjdk-amd64'
+PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+eval "$(rbenv init -)"
+export ANDROID_HOME=`brew --prefix android`
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
