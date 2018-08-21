@@ -10,90 +10,57 @@ if has('vim_starting')
   call neobundle#begin(expand('~/.vim/bundle/'))
 endif
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#begin('~/.vim/plugged')
 
-" main bundles
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'wincent/Command-T'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-" NeoBundle 'tsaleh/vim-matchit'
-NeoBundle 'danro/rename.vim'
-NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'dhruvasagar/vim-vinegar'
-" NeoBundle 'xolox/vim-easytags'
-NeoBundle 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-endwise'
+Plug 'ervandew/supertab'
+Plug 'tomtom/tcomment_vim'
+Plug 'scrooloose/nerdtree'
+Plug 'godlygeek/tabular'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'danro/rename.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'dhruvasagar/vim-vinegar'
+Plug 'tpope/vim-eunuch'
 
 " tmux
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'mhinz/vim-tmuxify'
-NeoBundle 'jgdavey/tslime.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'mhinz/vim-tmuxify'
+Plug 'jgdavey/tslime.vim'
 
 " syntax
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-cucumber'
-" NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'vim-scripts/ruby-matchit'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mtscout6/vim-cjsx'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'heartsentwined/vim-ember-script'
-NeoBundle 'heartsentwined/vim-emblem'
-NeoBundle 'nono/vim-handlebars'
-NeoBundle 'slim-template/vim-slim'
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'mxw/vim-jsx'
-" NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'cakebaker/scss-syntax.vim'
+Plug 'mxw/vim-jsx'
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx'
+Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 
-" NeoBundle 'Raimondi/delimitMate'
-" NeoBundle 'Valloric/YouCompleteMe'
-" NeoBundle 'marijnh/tern_for_vim'
-
-NeoBundle "MarcWeber/vim-addon-mw-utils"
-NeoBundle "tomtom/tlib_vim"
-" NeoBundle "garbas/vim-snipmate"
-" NeoBundle "honza/vim-snippets"
-
-NeoBundle 'lordm/vim-browser-reload-linux'
-NeoBundle 'xolox/vim-session'
-NeoBundle 'xolox/vim-misc'
-
-" Code quality
-" NeoBundle 'fousa/vim-flog'
-" NeoBundle 'sentientmonkey/vim-flog'
-NeoBundle 'ecomba/vim-ruby-refactoring'
+Plug 'lordm/vim-browser-reload-linux'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 
 " CSS
-NeoBundle 'CSSMinister'
-NeoBundle 'hostsamurai/typeredeemer'
+Plug 'vim-scripts/CSSMinister'
+" Plug 'hostsamurai/typeredeemer'
 
-NeoBundle 'twe4ked/vim-diff-toggle'
+Plug 'twe4ked/vim-diff-toggle'
 
-NeoBundle 'justinmk/vim-sneak'
-NeoBundle 'kien/rainbow_parentheses.vim'
-NeoBundle 'thoughtbot/vim-rspec'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'Keithbsmiley/rspec.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-dispatch'
 
-NeoBundle 'digitaltoad/vim-jade'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 
-NeoBundleCheck
-call neobundle#end()
+call plug#end()
 
 " ================ Ruby stuff ====================
 
@@ -121,35 +88,19 @@ let NERDTreeShowHidden = 1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " Ag
-let g:agprg="ag -p ~/dotfiles/agignore --column"
+let g:ag_prg="ag -p ~/dotfiles/agignore --column"
 
-" Cucumber syntastic
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
-let g:syntastic_javascript_checkers=['jshint']
-let g:syntastic_javascript_jshint_args = '--config /Users/domas/Developer/UniversalAvenue/.jshintrc'
+let g:syntastic_javascript_checkers=['jshint', 'eslint']
 let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_ruby_rubocop_args = '--config /Users/domas/Developer/UniversalAvenue/.rubocop.yml'
-let g:syntastic_coffee_checkers = ['coffee', 'coffeelint']
-" let g:syntastic_scss_checkers = ['scss_lint']
-" let g:syntastic_scss_scss_lint_args = '--config /Users/domas/Developer/UniversalAvenue/.scss-lint.yml'
-
-" Flog
-" :silent exe "g:flog_enable"
-
-" Reek
-let g:reek_always_show = 0
-
-" Command-T settings
-let g:CommandTMaxHeight = 15
-let g:CommandTAlwaysShowDotFiles = 1
-let g:CommandTMatchWindowReverse = 1
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/platforms/*"
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 let g:session_autosave = 'no'
 
 let mapleader=","
 
-" set bg=dark
+set bg=dark
 colorscheme solarized
 set t_Co=256
 " if $colorterm == 'gnome-terminal'
@@ -159,7 +110,7 @@ set term=xterm-256color
 " endif
 
 " ignore tags for command-t
-set wildignore+=.git,**/vendor,**/dhtml_calendar,**/ckeditor,**/bundle,log,tmp,*.tags
+" set wildignore+=.git,**/vendor,**/dhtml_calendar,**/ckeditor,**/bundle,log,tmp,*.tags
 set tags+=app.tags,gem.tags,js.tags
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500
@@ -190,7 +141,7 @@ set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
 " set cursorline
-set cc=100
+set cc=80
 
 set laststatus=2
 set statusline=\ "
@@ -221,11 +172,6 @@ set undofile
 set autoindent
 set smartindent
 set smarttab
-" Python
-" set shiftwidth=4
-" set softtabstop=4
-" set tabstop=4
-" Ruby
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -264,11 +210,8 @@ source ~/.vim/scripts/vim.vim
 
 imap jj <esc>
 map <leader>f :Ag<space>
-nnoremap <leader>t :CommandTFlush<cr>\|:CommandT<cr>
+nnoremap <leader>t :CtrlP<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
-map <leader>ew :e<space>
-map <leader>es :sp<space>
-map <leader>ev :vsp<cr>
 nnoremap <leader>bd :bd<cr>
 
 nnoremap <leader>vrc :e $MYVIMRC<cr>
@@ -290,18 +233,6 @@ command! -nargs=1 Silent
       \ | execute ':silent !'.<q-args>
       \ | execute ':redraw!'
 
-" git shortcuts
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gl :Glog<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gu :Git pull --rebase<cr>
-nnoremap <leader>gp :Git push origin HEAD<cr>
-
-" deploy shortcuts
-nnoremap <leader>cpl :!cap to_live deploy<cr>
-nnoremap <leader>cpm :!cap to_test deploy<cr>
-
 nnoremap <leader>w :w<CR>
 
 " Swap two words
@@ -315,10 +246,6 @@ nmap <leader>hl :set hlsearch! hlsearch?<CR>
 
 cmap w!! %!sudo tee > /dev/null
 nnoremap <leader>n :tab new<CR>
-nnoremap <leader>d Odebugger;<esc>:w<CR>
-
-" Refactoring
-" nnoremap <leader>z :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /g<CR>
 
 nnoremap <bar><bar> :Tab /<bar><CR>
 nnoremap r PjddkY
@@ -344,12 +271,6 @@ nnoremap <C-H> <C-W><C-H>
 
 au BufWritePre * call TrimEndLines()
 
-" let g:rspec_command = "compiler rspec | Make rspec {spec} --format documentation --color"
-let g:rspec_command = 'call Send_to_Tmux("rsp {spec}\n")'
-map <Leader>w :call RunCurrentSpecFile()<CR>
-map <Leader>e :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-
 call Cabbrev('E', 'e')
 call Cabbrev('qe', 'q')
 call Cabbrev('W', 'w')
@@ -360,15 +281,6 @@ call Cabbrev('BD', 'bd')
 call Cabbrev('Qall', 'qall')
 call Cabbrev('QAll', 'qall')
 
-call Cabbrev('rap', 'RAddParameter')
-call Cabbrev('rcpc', 'RConvertPostConditional')
-call Cabbrev('rel', 'RExtractLet')
-call Cabbrev('rec', 'RExtractConstant')
-call Cabbrev('relv', 'RExtractLocalVariable')
-call Cabbrev('rit', 'RInlineTemp')
-call Cabbrev('rrlv', 'RRenameLocalVariable')
-call Cabbrev('rriv', 'RRenameInstanceVariable')
-call Cabbrev('rem', 'RExtractMethod')
 call Cabbrev('hsla', 'ToHSLA')
 call Cabbrev('hlsa', 'ToHSLA')
 call Cabbrev('hex', 'ToHex')
@@ -412,3 +324,6 @@ imap jj <Esc>
 
 " arrows in INSERT mode
 set nocompatible
+
+let g:ctrlp_custom_ignore = 'node_modules'
+" autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
