@@ -1,14 +1,8 @@
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
 set nocompatible
 
 " ================ Plugin stuff ====================
 
 filetype off
-if has('vim_starting')
-  set rtp+=~/.vim/bundle/neobundle.vim/
-  call neobundle#begin(expand('~/.vim/bundle/'))
-endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -58,7 +52,7 @@ Plug 'twe4ked/vim-diff-toggle'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tpope/vim-dispatch'
 
-Plug 'mtscout6/syntastic-local-eslint.vim'
+" Plug 'mtscout6/syntastic-local-eslint.vim'
 
 call plug#end()
 
@@ -91,7 +85,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:ag_prg="ag -p ~/dotfiles/agignore --column"
 
 let makeprg = 'cc --dry-run --quiet --strict '.shellescape(expand('%'))
-let g:syntastic_javascript_checkers=['jshint', 'eslint']
+" let g:syntastic_javascript_checkers=['jshint', 'eslint']
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
@@ -101,7 +95,7 @@ let g:session_autosave = 'no'
 let mapleader=","
 
 set bg=dark
-colorscheme solarized
+" colorscheme solarized
 set t_Co=256
 " if $colorterm == 'gnome-terminal'
 set term=xterm-256color
@@ -110,7 +104,7 @@ set term=xterm-256color
 " endif
 
 " ignore tags for command-t
-" set wildignore+=.git,**/vendor,**/dhtml_calendar,**/ckeditor,**/bundle,log,tmp,*.tags
+set wildignore+=.git,**/node_modules/**,yarn.lock
 set tags+=app.tags,gem.tags,js.tags
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500
@@ -180,8 +174,6 @@ set expandtab
 filetype plugin on
 filetype indent on
 
-" display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
 " delete trailing spaces on save
 au bufwritepre * :%s/\s\+$//e
 
@@ -203,15 +195,18 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
-" ================ scripts ========================
-source ~/.vim/scripts/vim.vim
-
 " ================ mappings ========================
 
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
 imap jj <esc>
-map <leader>f :Ag<space>
+map <leader>f :vimgrep<space>
 nnoremap <leader>t :CtrlP<cr>
-nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>nt :Vexplore<cr>
 nnoremap <leader>bd :bd<cr>
 
 nnoremap <leader>vrc :e $MYVIMRC<cr>
