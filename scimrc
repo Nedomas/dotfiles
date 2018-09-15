@@ -1,0 +1,13 @@
+color "type=HEADINGS fg=BLUE bg=BLACK bold=0"
+color "type=CELL_SELECTION fg=WHITE bg=DEFAULT_COLOR bold=0"
+color "type=CELL_SELECTION_SC fg=DEFAULT_COLOR bg=BLUE bold=0"
+color "type=WELCOME bold=0 standout=0 dim=0 reverse=0 underline=0 blink=0 fg=DEFAULT_COLOR bg=DEFAULT_COLOR"
+color "type=INPUT bold=0 standout=0 dim=0 reverse=0 underline=0 blink=0 fg=DEFAULT_COLOR bg=DEFAULT_COLOR"
+color "type=MODE bold=0 standout=0 dim=0 reverse=0 underline=0 blink=0 fg=DEFAULT_COLOR bg=DEFAULT_COLOR"
+
+set autocalc
+set numeric
+set numeric_decimal=0
+set overlap
+set xlsx_readformulas
+set newline_action=0
