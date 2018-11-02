@@ -111,6 +111,7 @@ alias to="tmux detach -a"
 
 alias g=g_function
 alias gad='git add .'
+alias ga='git add'
 alias gau='git add . --update'
 alias gap='stty sane && git add --patch'
 alias gaa='git add -A'
@@ -138,6 +139,12 @@ alias gs='g stash'
 alias gss='g stash'
 alias gsp='gs pop'
 alias gsl='gs list'
+alias ys='yarn start'
+alias yb='yarn build'
+alias yi='yarn install'
+alias pd='prisma deploy'
+alias pdf='prisma deploy --force'
+alias pg='prisma generate'
 
 alias e='exit'
 
