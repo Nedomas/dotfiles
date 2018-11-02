@@ -147,6 +147,14 @@ alias pdf='prisma deploy --force'
 alias pg='prisma generate'
 
 alias e='exit'
+alias tt='timetip'
+alias noise='play -v 0.1 -n synth brownnoise'
+
+alias ys='yarn start'
+alias yi='yarn install'
+alias yb='yarn build'
+alias pd='prisma deploy'
+alias pg='prisma generate'
 
 # refs to Ben Orenstein
 g_function() {
@@ -178,3 +186,9 @@ export EDITOR='vim'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+export PATH=/usr/local/bin:$PATH
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
