@@ -173,6 +173,14 @@ alias vrc='vim ~/.vimrc'
 alias brc='vim ~/.bashrc && source ~/.bashrc'
 alias zrc='vim ~/.zshrc && source ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
+alias h='cd ~/Developer/honestive'
+alias c='cd ~/Developer/candour'
+alias y=yarn
+alias b='cd ~/Developer/bluepick/bluepick'
+alias riv='cd ~/Developer/riviera'
+alias ysd='y start:dev'
+alias p='./node_modules/prisma/dist/index.js'
+alias prisma=p
 
 # random prompt settings
 export HISTFILESIZE=10000
