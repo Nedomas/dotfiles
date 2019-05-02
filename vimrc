@@ -30,6 +30,7 @@ Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -48,7 +49,7 @@ let NERDTreeShowHidden = 1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " Ag
-let g:ag_prg="ag -p ~/dotfiles/agignore --column"
+let g:ag_prg="ag -p ~/Developer/dotfiles/agignore --column"
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
@@ -56,6 +57,13 @@ let g:ale_linters = {
 \  'javascript': ['eslint', 'jshint', 'flow']
 \}
 let g:ale_echo_msg_format = '%linter%: %s'
+" let g:ale_open_list = 'on_save'
+let g:ale_open_list = 0
+autocmd FileType qf setlocal wrap
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
 
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
@@ -74,7 +82,6 @@ set term=xterm-256color
 " let g:solarized_termcolors=256
 " endif
 
-" ignore tags for command-t
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500
 set ruler " show the cursor position all the time
@@ -217,6 +224,9 @@ endfunction
 au BufWritePre * call TrimEndLines()
 
 nnoremap <C-H> <C-W><C-H>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
 
 call Cabbrev('E', 'e')
 call Cabbrev('qe', 'q')
@@ -258,7 +268,9 @@ endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
+set mouse=a
 set ttymouse=xterm2
+" set ttymouse=xterm
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 imap jj <Esc>

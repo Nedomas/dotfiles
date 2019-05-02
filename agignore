@@ -5,9 +5,9 @@ bundle
 log
 tmp
 sqls
-javascripts/spec
 *.tags
 jquery
 underscore.min.js
 json2.js
 watchtower
+node_modules
