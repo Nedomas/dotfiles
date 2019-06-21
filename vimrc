@@ -22,10 +22,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/CSSMinister'
 Plug 'w0rp/ale'
 
-" " tmux
-" Plug 'christoomey/vim-tmux-navigator'
-" Plug 'mhinz/vim-tmuxify'
-
 " syntax
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
@@ -54,11 +50,16 @@ let g:ag_prg="ag -p ~/Developer/dotfiles/agignore --column"
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 let g:ale_linters = {
-\  'javascript': ['eslint', 'jshint', 'flow']
+\  'javascript': []
 \}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
+
 let g:ale_echo_msg_format = '%linter%: %s'
-" let g:ale_open_list = 'on_save'
 let g:ale_open_list = 0
+
 autocmd FileType qf setlocal wrap
 augroup CloseLoclistWindowGroup
   autocmd!
@@ -69,20 +70,16 @@ nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 let g:session_autosave = 'no'
-
 let mapleader=","
 
-set bg=light
-" set bg=dark
-" colorscheme solarized
+" set bg=light
+set bg=dark
+colorscheme solarized
 set t_Co=256
-" if $colorterm == 'gnome-terminal'
 set term=xterm-256color
-" set term=screen-256color
-" let g:solarized_termcolors=256
-" endif
 
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
 set history=500
 set ruler " show the cursor position all the time
 set showcmd " display incomplete commands
@@ -156,30 +153,27 @@ augroup myfiletypes
   autocmd!
 augroup END
 
-filetype plugin on
-filetype indent on
-
 " display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
 " delete trailing spaces on save
 au bufwritepre * :%s/\s\+$//e
 
-"don't wrap lines
+" don't wrap lines
 set nowrap
-"wrap lines at convenient points
+" wrap lines at convenient points
 set linebreak
 
 " ================ completion =======================
 
 set wildmode=list:longest
-"enable ctrl-n and ctrl-p to scroll thru matches
+" enable ctrl-n and ctrl-p to scroll thru matches
 set wildmenu
 
 " ================ scrolling ========================
 
-"start scrolling when we're 8 lines away from margins
+" start scrolling when we're 8 lines away from margins
 set scrolloff=8
-set sidescrolloff=15
+set sidescrolloff=20
 set sidescroll=1
 
 " ================ mappings ========================
@@ -192,8 +186,7 @@ nnoremap <leader>n :tab new<CR>
 nnoremap <leader>bd :bd<cr>
 
 nnoremap <leader>vrc :e $MYVIMRC<cr>
-nnoremap <leader>zrc :e ~/.zshrc<cr>
-nnoremap <leader>crc :e ~/.custom<cr>
+nnoremap <leader>brc :e ~/.bashrc<cr>
 nnoremap <leader>tmx :e ~/.tmux.conf<cr>
 
 command! -nargs=1 Silent
@@ -270,9 +263,9 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 set mouse=a
 set ttymouse=xterm2
-" set ttymouse=xterm
 
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" Allow JSX in normal JS files
+let g:jsx_ext_required = 0
 imap jj <Esc>
 nnoremap <leader>gb :Gblame<cr>
 map <leader>ev :vsp<cr>
