@@ -27,6 +27,7 @@ Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'jxnblk/vim-mdx-js'
 
 call plug#end()
 
@@ -49,14 +50,15 @@ let g:ag_prg="ag -p ~/Developer/dotfiles/agignore --column"
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-let g:ale_linters = {
-\  'javascript': []
-\}
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'css': ['prettier'],
-\}
+" let g:ale_linters = {
+" \  'javascript': []
+" \}
+" let g:ale_fixers = {
+" \   'javascript': ['prettier'],
+" \   'css': ['prettier'],
+" \}
 
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_echo_msg_format = '%linter%: %s'
 let g:ale_open_list = 0
 
@@ -72,8 +74,8 @@ nnoremap <leader>ap :ALEPreviousWrap<cr>
 let g:session_autosave = 'no'
 let mapleader=","
 
-" set bg=light
-set bg=dark
+set bg=light
+" set bg=dark
 colorscheme solarized
 set t_Co=256
 set term=xterm-256color
@@ -142,6 +144,7 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
+set shiftround
 
 " Enable syntax highlighting
 syntax on
@@ -178,7 +181,6 @@ set sidescroll=1
 
 " ================ mappings ========================
 
-imap jj <esc>
 map <leader>f :Ag<space>
 nnoremap <leader>t :CtrlP<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
@@ -266,7 +268,6 @@ set ttymouse=xterm2
 
 " Allow JSX in normal JS files
 let g:jsx_ext_required = 0
-imap jj <Esc>
 nnoremap <leader>gb :Gblame<cr>
 map <leader>ev :vsp<cr>
 

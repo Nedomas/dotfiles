@@ -1,5 +1,0 @@
-doctor_function() {
-  brew update && brew upgrade && brew prune && brew doctor && upgrade_oh_my_zsh && sudo rm -f /private/var/log/asl/*.asl
-}
-
-alias a='ls -lrthG'
