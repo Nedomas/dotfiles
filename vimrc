@@ -51,7 +51,7 @@ let g:ag_prg="ag -p ~/Developer/dotfiles/agignore --column"
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " let g:ale_linters = {
-" \  'javascript': []
+" \  'markdown': ['alex', 'markdownlint', 'writegood']
 " \}
 " let g:ale_fixers = {
 " \   'javascript': ['prettier'],
@@ -61,6 +61,7 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_echo_msg_format = '%linter%: %s'
 let g:ale_open_list = 0
+autocmd BufEnter plan.md ALEDisable
 
 autocmd FileType qf setlocal wrap
 augroup CloseLoclistWindowGroup
@@ -218,10 +219,10 @@ function TrimEndLines()
 endfunction
 au BufWritePre * call TrimEndLines()
 
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
+nnoremap <Left> <C-W><C-H>
+nnoremap <Right> <C-W><C-L>
+nnoremap <Down> <C-W><C-J>
+nnoremap <Up> <C-W><C-K>
 
 call Cabbrev('E', 'e')
 call Cabbrev('qe', 'q')
@@ -272,3 +273,7 @@ nnoremap <leader>gb :Gblame<cr>
 map <leader>ev :vsp<cr>
 
 let g:ctrlp_custom_ignore = 'node_modules'
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
