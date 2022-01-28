@@ -20,16 +20,39 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/CSSMinister'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
+
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 " syntax
-Plug 'mxw/vim-jsx'
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'jxnblk/vim-mdx-js'
+" Plug 'mxw/vim-jsx'
+" Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+" Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'jxnblk/vim-mdx-js'
 
 call plug#end()
+
+" rehighlight big files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 " ================ Speed ====================
 set ttyfast
@@ -58,10 +81,10 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 " \   'css': ['prettier'],
 " \}
 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_echo_msg_format = '%linter%: %s'
-let g:ale_open_list = 0
-autocmd BufEnter plan.md ALEDisable
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_echo_msg_format = '%linter%: %s'
+" let g:ale_open_list = 0
+" autocmd BufEnter plan.md ALEDisable
 
 autocmd FileType qf setlocal wrap
 augroup CloseLoclistWindowGroup
@@ -69,8 +92,8 @@ augroup CloseLoclistWindowGroup
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
-nnoremap <leader>an :ALENextWrap<cr>
-nnoremap <leader>ap :ALEPreviousWrap<cr>
+" nnoremap <leader>an :ALENextWrap<cr>
+" nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 let g:session_autosave = 'no'
 let mapleader=","
