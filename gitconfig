@@ -1,5 +1,5 @@
 [user]
-	name = Domas
+	name = Domas Bitvinskas
 	email = domas.bitvinskas@me.com
 [github]
 	user = Nedomas
@@ -30,3 +30,10 @@
 	main-window-view = HistoryView
 	history-view-vpane-position = 361
 	file-view-vpane-position = 975
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[init]
+	defaultBranch = main

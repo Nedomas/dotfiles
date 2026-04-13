@@ -1,28 +1,16 @@
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-alias v=vim
-alias s=sc-im
-alias sc=sc-im
+alias v=nvim
 alias hg='history | grep'
 
 alias t=tmux
 alias ta="tmux attach"
 alias tls='tmux ls'
 alias td='tmux detach'
-alias to="tmux detach -a"
 
 alias g=g_function
-alias gad='git add .'
 alias ga='git add'
-alias gau='git add . --update'
 alias gap='stty sane && git add --patch'
 alias gaa='git add -A'
-alias gbr='git branch'
 alias gc='git commit'
-alias gca='git commit -a'
-alias gcl='git clone'
 alias gcm='git commit -m'
 alias gup='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
@@ -31,34 +19,18 @@ alias gl='git log'
 
 alias gco='git checkout'
 alias gcob='gco -b'
-alias gd='gdl'
 alias gdl='git diff --color=always | less -r'
+alias gd='gdl'
 alias gf='g fetch'
 alias gpoh='git push origin HEAD'
 
 alias gr='g reset'
-alias grhard='g reset --hard HEAD'
 alias gpick='g cherry-pick'
 alias gs='g stash'
 alias gss='g stash'
 alias gsp='gs pop'
 alias gsl='gs list'
-alias ys='yarn start'
-alias yb='yarn build'
-alias yi='yarn install'
-alias pd='prisma deploy'
-alias pdf='prisma deploy --force'
-alias pg='prisma generate'
-
 alias e='exit'
-alias tt='timetip'
-alias noise='play -v 0.1 -n synth brownnoise'
-
-alias ys='yarn start'
-alias yi='yarn install'
-alias yb='yarn build'
-alias pd='prisma deploy'
-alias pg='prisma generate'
 
 # refs to Ben Orenstein
 g_function() {
@@ -73,22 +45,39 @@ g_function() {
 alias dot='cd $HOME/Developer/dotfiles'
 alias dev='cd $HOME/Developer'
 
-alias vrc='vim ~/.vimrc'
-alias brc='vim ~/.bashrc && source ~/.bashrc'
-alias zrc='vim ~/.zshrc && source ~/.zshrc'
-alias trc='vim ~/.tmux.conf'
-alias h='cd ~/Developer/honestive'
-alias c='cd ~/Developer/candour'
-alias y=yarn
-alias b='cd ~/Developer/bluepick/bluepick'
-alias riv='cd ~/Developer/riviera'
-alias ysd='y start:dev'
-alias p=prisma
+alias vrc='v ~/.vimrc'
+alias brc='v ~/.bashrc && source ~/.bashrc'
+alias zrc='v ~/.zshrc && source ~/.zshrc'
+alias trc='v ~/.tmux.conf'
 
-shopt -s histappend
-
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
 HISTCONTROL=ignoredups:ignorespace
 COMPLETION_WAITING_DOTS="true"
-export EDITOR='vim'
+export EDITOR='nvim'
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(rbenv init - zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=$PATH:/Users/domas/Library/Python/2.7/bin
+export PATH=$(pyenv root)/shims:$PATH
+export ANDROID_HOME=/Users/domas/Library/Android/sdk
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/domas/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# Created by `pipx` on 2025-04-26 13:47:12
+export PATH="$PATH:/Users/domas/.local/bin"
+
+# bun completions
+[ -s "/Users/domas/.bun/_bun" ] && source "/Users/domas/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

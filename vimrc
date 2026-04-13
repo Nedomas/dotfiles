@@ -20,35 +20,56 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/CSSMinister'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
+Plug 'ishan9299/nvim-solarized-lua'
+" Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-tsserver']
 
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
+Plug 'prisma/vim-prisma'
+" Plug 'github/copilot.vim'
+Plug 'jxnblk/vim-mdx-js'
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" let g:coc_global_extensions = [
-"   \ 'coc-tsserver'
-"   \ ]
-"
-" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-"   let g:coc_global_extensions += ['coc-prettier']
-" endif
-"
-" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-"   let g:coc_global_extensions += ['coc-eslint']
-" endif
+" NEOVIM
+" Deps
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'stevearc/dressing.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'MunifTanjim/nui.nvim'
 
-" syntax
-" Plug 'mxw/vim-jsx'
-" Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-" Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'jxnblk/vim-mdx-js'
+" Optional deps
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-tree/nvim-web-devicons' "or Plug 'echasnovski/mini.icons'
+Plug 'HakonHarnes/img-clip.nvim'
+" Plug 'zbirenbaum/copilot.lua'
+
+" Yay, pass source=true if you want to build from source
+" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make', 'on': 'AvanteAsk' }
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 
 call plug#end()
+
+autocmd! User avante.nvim
+lua << EOF
+  package.path = string.format("%s;%s/.vim/plugged/avante.nvim/lua/?.lua", package.path, os.getenv("HOME"))
+  package.path = string.format("%s;%s/.vim/plugged/avante.nvim/lua/?/init.lua", package.path, os.getenv("HOME"))
+
+  require('render-markdown').setup({
+    file_types = { "markdown", "Avante" }
+  })
+  require('avante_lib').load()
+  -- require('avante').setup({
+  --   auto_suggestions_provider = "copilot",
+  -- })
+EOF
+
+" NEOVIM END
 
 " rehighlight big files
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
@@ -56,7 +77,7 @@ autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 " ================ Speed ====================
 set ttyfast
-set ttyscroll=3
+" set ttyscroll=3
 set lazyredraw
 set synmaxcol=128
 set scrolljump=5
@@ -73,36 +94,20 @@ let g:ag_prg="ag -p ~/Developer/dotfiles/agignore --column"
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-" let g:ale_linters = {
-" \  'markdown': ['alex', 'markdownlint', 'writegood']
-" \}
-" let g:ale_fixers = {
-" \   'javascript': ['prettier'],
-" \   'css': ['prettier'],
-" \}
-
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_echo_msg_format = '%linter%: %s'
-" let g:ale_open_list = 0
-" autocmd BufEnter plan.md ALEDisable
-
-autocmd FileType qf setlocal wrap
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
-" nnoremap <leader>an :ALENextWrap<cr>
-" nnoremap <leader>ap :ALEPreviousWrap<cr>
+" autocmd FileType qf setlocal wrap
+" augroup CloseLoclistWindowGroup
+"   autocmd!
+"   autocmd QuitPre * if empty(&buftype) | lclose | endif
+" augroup END
 
 let g:session_autosave = 'no'
 let mapleader=","
 
-set bg=light
-" set bg=dark
-colorscheme solarized
+" set bg=light
+set bg=dark
+colorscheme solarized-flat
 set t_Co=256
-set term=xterm-256color
+" set term=xterm-256color
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -130,7 +135,7 @@ set showmode " show current mode down the bottom
 set gcr=a:blinkon0 " disable cursor blink
 set visualbell " no sounds
 set autoread " reload files changed outside vim
-set noesckeys " get rid of the delay when hitting esc!
+" set noesckeys " get rid of the delay when hitting esc!
 set hidden " let buffers exist hidden
 set timeoutlen=500
 set cc=80
@@ -246,6 +251,7 @@ nnoremap <Left> <C-W><C-H>
 nnoremap <Right> <C-W><C-L>
 nnoremap <Down> <C-W><C-J>
 nnoremap <Up> <C-W><C-K>
+xnoremap cp :'<,'>w !pbcopy<CR><CR>
 
 call Cabbrev('E', 'e')
 call Cabbrev('qe', 'q')
@@ -288,11 +294,11 @@ endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 set mouse=a
-set ttymouse=xterm2
+" set ttymouse=xterm2
 
 " Allow JSX in normal JS files
 let g:jsx_ext_required = 0
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gb :Git blame<cr>
 map <leader>ev :vsp<cr>
 
 let g:ctrlp_custom_ignore = 'node_modules'
@@ -300,3 +306,5 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+nmap <silent> gd <Plug>(coc-definition)        " jump to definition

@@ -125,22 +125,10 @@ alias gs='g stash'
 alias gss='g stash'
 alias gsp='gs pop'
 alias gsl='gs list'
-alias ys='yarn start'
-alias yb='yarn build'
-alias yi='yarn install'
-alias pd='prisma deploy'
-alias pdf='prisma deploy --force'
-alias pg='prisma generate'
 
 alias e='exit'
 alias tt='timetip'
 alias noise='play -v 0.1 -n synth brownnoise'
-
-alias ys='yarn start'
-alias yi='yarn install'
-alias yb='yarn build'
-alias pd='prisma deploy'
-alias pg='prisma generate'
 
 # refs to Ben Orenstein
 g_function() {
@@ -159,13 +147,6 @@ alias vrc='vim ~/.vimrc'
 alias brc='vim ~/.bashrc && source ~/.bashrc'
 alias zrc='vim ~/.zshrc && source ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
-alias h='cd ~/Developer/honestive'
-alias c='cd ~/Developer/candour'
-alias y=yarn
-alias b='cd ~/Developer/bluepick/bluepick'
-alias riv='cd ~/Developer/riviera'
-alias ysd='y start:dev'
-alias p=prisma
 
 # random prompt settings
 export HISTFILESIZE=10000
